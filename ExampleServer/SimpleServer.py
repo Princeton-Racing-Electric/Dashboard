@@ -11,6 +11,8 @@ Run this application by:
     3) Run the python script
         - $ python SimpleServer.py
 """
+# Note: Flask let's you render html templates at a route, so that could
+# be useful for the UI
 # I think there's a way to configure virtual environments with pycharm
 # so you can just hit the green arrow to run, so if people don't want
 # to use the command line we can figure that out too
