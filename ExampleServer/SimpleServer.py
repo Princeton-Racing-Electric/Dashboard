@@ -1,5 +1,6 @@
 """
 Run this application by:
+    Make sure you cd into this directory: ExampleServer/
     1) activating the venv (virtual environment, which contains the
        packages needed)
         - $ . venv/bin/activate
