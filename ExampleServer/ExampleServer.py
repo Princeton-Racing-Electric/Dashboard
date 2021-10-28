@@ -16,7 +16,7 @@ Run this application by:
     3) Install the needed packages to the venv
         - $ pip install -r requirements.txt
     4) Run the python script
-        - $ python SimpleServer.py
+        - $ python ExampleServer.py
 """
 
 # I think there's a way to configure virtual environments with pycharm
@@ -27,22 +27,45 @@ from datetime import datetime
 from flask import Flask, render_template, jsonify
 from threading import Thread
 import time
+import signal
+
+# DATA-UPDATING THREAD(S) ##############################################
 
 
-# Creates a flask app (which is just an instance of the Flask class)
-app = Flask(__name__)
+# Just for ease of testing, so only one interrupt is needed to stop the
+# server and thread
+def handle_keyboard_int(signal, stack_frame):
+    global incrementing
+    incrementing = False
+    raise KeyboardInterrupt()
+
+
+# Link handle_keyboard_int function to a SIGINT signal (ctrl-c)
+signal.signal(signal.SIGINT, handle_keyboard_int)
 
 
 def increment_var():
     global counter
-    while True:
+    while incrementing:
         counter = counter + 1
         time.sleep(1)
 
 
 # Create a global variable and a thread for incrementing it
+# When transferring this same kinda logic over to the data from the
+# sensors, we would probably just do the same thing but with global
+# variables for each of the sensor data values
 counter = 0
+incrementing = True
 t = Thread(target=increment_var)
+
+########################################################################
+
+
+# FLASK SERVER #########################################################
+
+# Creates a flask app (which is just an instance of the Flask class)
+app = Flask(__name__)
 
 
 # Create a basic route for the flask server
@@ -59,6 +82,7 @@ def update():
         {"value": counter, "time": datetime.now().strftime("%H:%M:%S")}
     )
 
+########################################################################
 
 # Can also run the application with the following command line commands
 # $ export FLASK_APP=SimpleServer
@@ -66,6 +90,7 @@ def update():
 
 # For continuously updating the page
 # https://stackoverflow.com/questions/59780007/ajax-with-flask-for-real-time-esque-updates-of-sensor-data-on-webpage
+
 
 if __name__ == "__main__":
     t.start()
