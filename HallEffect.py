@@ -54,6 +54,7 @@ def calculate_speed(wheel_diameter):
         rpm = (1 / elapsed_time * 60) * adjustment
         wheel_circumf_in = math.pi * wheel_diameter_in  # wheel circumference in inches
         mph = (rpm * wheel_circumf_in) / 1056
+        return mph
 
 
 def init_interrupt():

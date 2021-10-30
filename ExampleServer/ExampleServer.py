@@ -29,6 +29,12 @@ from threading import Thread
 import time
 import signal
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from HallEffect import calculate_speed
+from Temperature import read_temp 
+
 # Constants
 DELAY_TIME = 1
 
@@ -59,14 +65,13 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    # dummy code, return the current time lol
-    return time.time()
+    return calculate_speed(20) 
 
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
     # dummy code, return the current time lol
-    return time.time()
+    return read_temp() 
 ############################################
 
 
