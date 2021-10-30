@@ -4,7 +4,7 @@ import time, math
 import os  # needed to find out if output directory already exists
 from datetime import datetime  # needed to add time and date to output file
 
-gpio_pin_number = 29  # GPIO Pin used by sensor
+gpio_pin_number = 5  # GPIO Pin used by sensor
 wheel_diameter_in = 20  # wheel diameter in inches
 adjustment = 1  # adjustment for gear ratio or number of magnets
 seconds = 1  # time to wait between printing values
@@ -54,7 +54,6 @@ def calculate_speed(wheel_diameter):
         rpm = (1 / elapsed_time * 60) * adjustment
         wheel_circumf_in = math.pi * wheel_diameter_in  # wheel circumference in inches
         mph = (rpm * wheel_circumf_in) / 1056
-        return mph
 
 
 def init_interrupt():
