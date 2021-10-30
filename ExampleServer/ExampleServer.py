@@ -29,14 +29,22 @@ from threading import Thread
 import time
 import signal
 
-# DATA-UPDATING THREAD(S) ##############################################
+# Constants
+DELAY_TIME = 1
 
+# GLOBAL VARIABLES 
+# for sensor data
+mph = 0
+temperature = 0
+# for threading
+counter = 0
+running = True
 
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
 def handle_keyboard_int(signal, stack_frame):
-    global incrementing
-    incrementing = False
+    global running
+    running = False
     raise KeyboardInterrupt()
 
 
@@ -44,23 +52,62 @@ def handle_keyboard_int(signal, stack_frame):
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
 
+# MAYBE: we could make a sensors class that encapsulates all the needed
+# code for the sensors, then we can just create an instance of that here
+# it could have get_speed and get_temp...
+# Data-fetching functions for sensors #######
+# returns the current speed in miles per hour using the hall effect
+# sensor
+def get_speed() -> float:
+    # dummy code, return the current time lol
+    return time.time()
+
+
+# returns the current temperature in (???) from the temp sensor
+def get_temp() -> float:
+    # dummy code, return the current time lol
+    return time.time()
+############################################
+
+
+# Data-updating functions for threads #######
+# Update speed
+def update_speed():
+    global mph
+    while running:
+        mph = get_speed()
+        time.sleep(DELAY_TIME)
+
+
+# Update temperature
+def update_temp():
+    global temperature
+    while running:
+        temperature = get_temp()
+        time.sleep(DELAY_TIME)
+
+
+# Update test variable
 def increment_var():
     global counter
-    while incrementing:
+    while running:
         counter = counter + 1
-        time.sleep(1)
+        time.sleep(DELAY_TIME)
+##############################
 
 
-# Create a global variable and a thread for incrementing it
+# Create a global variable and a thread for updating it
 # When transferring this same kinda logic over to the data from the
 # sensors, we would probably just do the same thing but with global
 # variables for each of the sensor data values
-counter = 0
-incrementing = True
-t = Thread(target=increment_var)
+
+running = True
+t1 = Thread(target=increment_var)
+# could maybe combine the sensors into just one thread?
+t2 = Thread(target=update_speed)
+t3 = Thread(target=update_temp)
 
 ########################################################################
-
 
 # FLASK SERVER #########################################################
 
@@ -72,16 +119,20 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # Renders the index.html template (in the templates folder)
-    return render_template("index.html", counter=counter)
+    return render_template("dashboard.html", counter=counter)
 
 
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
     return jsonify(
-        {"value": counter, "time": datetime.now().strftime("%H:%M:%S")}
+        {
+            "value": counter,
+            "mph": mph,
+            "temperature": temperature,
+            "time": datetime.now().strftime("%H:%M:%S")
+        }
     )
-
 ########################################################################
 
 # Can also run the application with the following command line commands
@@ -93,5 +144,7 @@ def update():
 
 
 if __name__ == "__main__":
-    t.start()
+    t1.start()
+    t2.start()
+    t3.start()
     app.run(debug=True)
