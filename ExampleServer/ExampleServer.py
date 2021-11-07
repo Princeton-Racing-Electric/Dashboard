@@ -65,7 +65,6 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    print(calculate_speed(20))
     return calculate_speed(20) 
 
 
