@@ -123,7 +123,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # Renders the index.html template (in the templates folder)
-    return render_template("dashboard.html", counter=counter)
+    return render_template("board.html", counter=counter)
 
 
 # route to return current value of my_variable
