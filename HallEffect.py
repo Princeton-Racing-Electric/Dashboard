@@ -63,22 +63,22 @@ def init_interrupt():
 if __name__ == '__main__':
     init_GPIO()
     init_interrupt()
-with open(filepath, "a") as log:
-    while True:
+    with open(filepath, "a") as log:
+        while True:
 
-        if number_interrupts != previous_number_interrupts:
-            calculate_speed(wheel_diameter_in)  # call this function with wheel diameter as parameter
-            print(f"RPM = {round(rpm)}, MPH = {round(mph, 1)}")
-            log.write("{0},{1},{2}\n".format(str(round(rpm)), (str(round(mph, 1))),
-                                             strftime("%Y-%m-%d %H:%M:%S")))  # write RPM and time to log file
+            if number_interrupts != previous_number_interrupts:
+                calculate_speed(wheel_diameter_in)  # call this function with wheel diameter as parameter
+                print(f"RPM = {round(rpm)}, MPH = {round(mph, 1)}")
+                log.write("{0},{1},{2}\n".format(str(round(rpm)), (str(round(mph, 1))),
+                                                strftime("%Y-%m-%d %H:%M:%S")))  # write RPM and time to log file
 
-        if (number_interrupts == previous_number_interrupts):  # no new interrupts, so rpm & mph = 0
-            rpm = 0
-            mph = 0.0
-            print(f"RPM = {round(rpm)}, MPH = {round(mph, 1)}")
-            log.write(
-                "{0},{1}\n".format(str(round(rpm)), strftime("%Y-%m-%d %H:%M:%S")))  # write RPM and time to log file
+            if (number_interrupts == previous_number_interrupts):  # no new interrupts, so rpm & mph = 0
+                rpm = 0
+                mph = 0.0
+                print(f"RPM = {round(rpm)}, MPH = {round(mph, 1)}")
+                log.write(
+                    "{0},{1}\n".format(str(round(rpm)), strftime("%Y-%m-%d %H:%M:%S")))  # write RPM and time to log file
 
-        previous_number_interrupts = number_interrupts
+            previous_number_interrupts = number_interrupts
 
-        sleep(seconds)  # wait before displaying & writing more data
+            sleep(seconds)  # wait before displaying & writing more data

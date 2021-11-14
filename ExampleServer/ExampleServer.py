@@ -32,7 +32,7 @@ import signal
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from HallEffect import calculate_speed
+import HallEffect 
 from Temperature import read_temp 
 
 # Constants
@@ -65,13 +65,11 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    print(calculate_speed(20))
-    return calculate_speed(20) 
-
+    print(HallEffect.calculate_speed(20))
+    return HallEffect.calculate_speed(20) 
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
-    # dummy code, return the current time lol
     return read_temp()[1]
 ############################################
 
