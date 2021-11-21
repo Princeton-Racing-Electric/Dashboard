@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='dashboard.css')}}"
+    />
+
+    <!-- Necessary script for running jQuery. Which we use for AJAX -->
+    <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+
+    <!-- Necessary script for fetching sensor data from python server -->
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+    <title>Dashboard</title>
+  </head>
+
+  <body>
+    <div id="main">
+        <div id="temperature-container">
+            <span class="text-small">Temperature</span>
+            <span id="temperature" class="text-large"></span>
+        </div>
+        <div id="accel-speed-container">
+          <div id="accel-container">
+            <span id="acceleration" class="text-large"></span>
+            <span class="text-small">Accel</span>
+          </div>
+          <div id="speed-container">
+            <span id="speed" class="text-large"></span>
+            <span class="text-small">Speed</span>
+          </div>
+        </div>
+        <div id="battery-container">
+          <span class="text-small">Battery</span>
+        </div>
+        <div id="mileage-container">
+          <span class="text-small">Mileage</span>
+        </div>
+    </div>
+  </body>
+</html>
