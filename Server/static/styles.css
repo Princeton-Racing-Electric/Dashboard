@@ -8,6 +8,7 @@
     border-color: white;
     border-width: 1px;
     float:left;
+    position: static;
 }
 
 .mydiv2{
@@ -31,5 +32,10 @@
 }
 
 .center {
-    padding: 70px 0;
+    position: relative;
+    top: 50%;
+}
+
+p {
+    margin: 0;
 }
