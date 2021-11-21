@@ -1,4 +1,4 @@
-# ExampleServer.py
+# Server.py
 
 """
 Run this application by:
@@ -114,7 +114,6 @@ t3 = Thread(target=update_temp)
 ########################################################################
 
 # FLASK SERVER #########################################################
-
 # Creates a flask app (which is just an instance of the Flask class)
 app = Flask(__name__)
 
