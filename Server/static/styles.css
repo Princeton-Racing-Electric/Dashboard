@@ -29,3 +29,7 @@
     border-width: 1px;
     float:left; 
 }
+
+.center {
+    padding: 70px 0;
+}
