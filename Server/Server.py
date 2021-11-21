@@ -65,8 +65,17 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    print(HallEffect.calculate_speed(20))
-    return HallEffect.calculate_speed(20) 
+    num_interrupts = HallEffect.number_interrupts
+    prev_num_interrupts = HallEffect.previous_number_interrupts
+    rpm = 0
+    mph = 0
+
+    if num_interrupts != prev_num_interrupts:
+        HallEffect.calculate_speed(20)
+        mph = HallEffect.mph
+
+    print(mph)
+    return mph
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
