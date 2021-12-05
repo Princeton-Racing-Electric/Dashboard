@@ -1,0 +1,43 @@
+/* Touchscreen is 800x480 */
+
+.center {
+    padding: 70px 0;
+}
+
+.box {
+    display: flex;
+    flex-direction: wrap;
+    justify-content: space-between;
+    background-color: #0B101F;
+}
+
+.item {
+    width: 10rem;
+    background-color:#0B101F ;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    text-align: center;
+}
+
+.one {
+    width: 32%;
+    height:150px;
+}
+.two{
+    width: 48%;
+    /*flex-direction: row;*/
+    height:188px;
+    background-color:#0B101F ;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px; 
+}
+.three{
+    width: 100%;
+    height:141px;
+    background-color:#0B101F ;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+}
