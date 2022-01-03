@@ -32,7 +32,8 @@ import signal
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import HallEffect 
+import HallEffect
+import Voltage
 from Temperature import read_temp 
 
 # Constants
@@ -42,6 +43,7 @@ DELAY_TIME = 1
 # for sensor data
 mph = 0
 temperature = 0
+voltage = 0
 # for threading
 counter = 0
 running = True
@@ -80,6 +82,10 @@ def get_speed() -> float:
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
     return read_temp()[1]
+
+def get_volt() -> float:
+    ad_value = Voltage.readadc(Voltage.AO_pin, Voltage.SPICLK, Voltage.SPIMOSI, Voltage.SPIMISO, Voltage.SPICS)
+    return ad_value * (3.3 / 1024) * 5
 ############################################
 
 
@@ -97,6 +103,13 @@ def update_temp():
     global temperature
     while running:
         temperature = get_temp()
+        time.sleep(DELAY_TIME)
+
+# Update voltage
+def update_volt():
+    global voltage
+    while running:
+        voltage = get_volt()
         time.sleep(DELAY_TIME)
 
 
@@ -119,6 +132,7 @@ t1 = Thread(target=increment_var)
 # could maybe combine the sensors into just one thread?
 t2 = Thread(target=update_speed)
 t3 = Thread(target=update_temp)
+t4 = Thread(target=update_volt)
 
 ########################################################################
 
@@ -142,6 +156,7 @@ def update():
             "value": counter,
             "mph": mph,
             "temperature": temperature,
+            "voltage": voltage,
             "time": datetime.now().strftime("%H:%M:%S")
         }
     )
@@ -158,7 +173,9 @@ def update():
 if __name__ == "__main__":
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
+    Voltage.init()
     t1.start()
     t2.start()
     t3.start()
+    t4.start()
     app.run(debug=True)
