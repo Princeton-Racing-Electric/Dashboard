@@ -162,6 +162,18 @@ def update():
     )
 ########################################################################
 
+# restarts the raspberry pi
+# runs the bash script sudo shutdown -r now
+
+def restart():
+    command = "/usr/bin/sudo /sbin/shutdown -r now"
+    import subprocess
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    print output
+
+########################################################################
+
 # Can also run the application with the following command line commands
 # $ export FLASK_APP=SimpleServer
 # $ python -m flask run
