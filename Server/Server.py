@@ -26,7 +26,7 @@ Run this application by:
 from datetime import datetime
 from flask import Flask, render_template, jsonify
 from threading import Thread
-import time
+import time, math
 import signal
 
 import sys
@@ -38,12 +38,14 @@ from Temperature import read_temp
 
 # Constants
 DELAY_TIME = 1
+WHEEL_DIAMETER_IN = 20
 
 # GLOBAL VARIABLES 
 # for sensor data
 mph = 0
 temperature = 0
 voltage = 0
+miles = 0
 # for threading
 counter = 0
 running = True
@@ -69,11 +71,10 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 def get_speed() -> float:
     num_interrupts = HallEffect.number_interrupts
     prev_num_interrupts = HallEffect.previous_number_interrupts
-    rpm = 0
     mph = 0
 
     if num_interrupts != prev_num_interrupts:
-        HallEffect.calculate_speed(20)
+        HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
         mph = HallEffect.mph
 
     print(mph)
@@ -86,6 +87,10 @@ def get_temp() -> float:
 def get_volt() -> float:
     ad_value = Voltage.readadc(Voltage.AO_pin, Voltage.SPICLK, Voltage.SPIMOSI, Voltage.SPIMISO, Voltage.SPICS)
     return ad_value * (3.3 / 1024) * 5
+
+def get_miles() -> float:
+    miles = HallEffect.number_interrupts * WHEEL_DIAMETER_IN * math.pi / 63360
+    return miles
 ############################################
 
 
@@ -112,6 +117,13 @@ def update_volt():
         voltage = get_volt()
         time.sleep(DELAY_TIME)
 
+# Update miles
+def update_miles():
+    global miles
+    while running:
+        miles = get_miles()
+        time.sleep(DELAY_TIME)
+
 
 # Update test variable
 def increment_var():
@@ -133,6 +145,7 @@ t1 = Thread(target=increment_var)
 t2 = Thread(target=update_speed)
 t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
+t5 = Thread(target=update_miles)
 
 ########################################################################
 
@@ -157,6 +170,7 @@ def update():
             "mph": mph,
             "temperature": temperature,
             "voltage": voltage,
+            "mileage": miles,
             "time": datetime.now().strftime("%H:%M:%S")
         }
     )
@@ -190,4 +204,5 @@ if __name__ == "__main__":
     t2.start()
     t3.start()
     t4.start()
+    t5.start()
     app.run(debug=True)

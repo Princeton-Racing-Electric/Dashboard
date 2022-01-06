@@ -52,7 +52,7 @@ def calculate_speed(wheel_diameter):
     global number_interrupts, elapsed_time, rpm, mph
     if elapsed_time != 0:  # avoid DivisionByZero error
         rpm = (1 / elapsed_time * 60) * adjustment
-        wheel_circumf_in = math.pi * wheel_diameter_in  # wheel circumference in inches
+        wheel_circumf_in = math.pi * wheel_diameter  # wheel circumference in inches
         mph = (rpm * wheel_circumf_in) / 1056
 
 
