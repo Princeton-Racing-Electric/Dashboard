@@ -10,6 +10,8 @@ adjustment = 1  # adjustment for gear ratio or number of magnets
 seconds = 1  # time to wait between printing values
 rpm = 0
 mph = 0
+prev_mph = 0
+accel = 0
 elapsed_time = 0  # amount of time a full revolution takes
 number_interrupts = 0  # counts interrupts (triggered by sensor)
 previous_number_interrupts = 0
@@ -49,11 +51,17 @@ def calculate_elapsed_time(channel):
 
 
 def calculate_speed(wheel_diameter):
-    global number_interrupts, elapsed_time, rpm, mph
+    global number_interrupts, elapsed_time, rpm, mph, prev_mph
     if elapsed_time != 0:  # avoid DivisionByZero error
         rpm = (1 / elapsed_time * 60) * adjustment
         wheel_circumf_in = math.pi * wheel_diameter  # wheel circumference in inches
+        prev_mph = mph
         mph = (rpm * wheel_circumf_in) / 1056
+
+def calculate_accel():
+    global number_interrupts, elapsed_time, mph, prev_mph, accel
+    if elapsed_time != 0:  # avoid DivisionByZero error
+        accel = (mph - prev_mph) / elapsed_time
 
 
 def init_interrupt():
