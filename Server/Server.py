@@ -176,9 +176,8 @@ app = Flask(__name__)
 # Create a basic route for the flask server
 @app.route("/")
 def index():
-    # Renders the index.html template (in the templates folder)
-    return render_template("board.html", counter=counter)
-
+    # Renders the index.html template (in the templates folder) - must match the html file 
+    return render_template("boardv2.html", counter=counter)
 
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
@@ -195,10 +194,17 @@ def update():
         }
     )
 ########################################################################
+# Test code to ensure that button goes to app.route on click
+@app.route('/test')
+def test():
+    print ('I got clicked\n')
+    return 'Click'
+
+########################################################################
 
 # restarts the raspberry pi
 # runs the bash script sudo shutdown -r now
-
+@app.route("/restart")
 def restart():
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
