@@ -61,7 +61,7 @@ def calculate_speed(wheel_diameter):
 def calculate_accel():
     global number_interrupts, elapsed_time, mph, prev_mph, accel
     if elapsed_time != 0:  # avoid DivisionByZero error
-        accel = (mph - prev_mph) / elapsed_time
+        accel = (mph - prev_mph) / elapsed_time * 0.44704
 
 
 def init_interrupt():
