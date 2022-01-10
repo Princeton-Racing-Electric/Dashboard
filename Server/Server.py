@@ -198,7 +198,7 @@ def update():
 @app.route('/test')
 def test():
     print ('I got clicked\n')
-    return 'Click'
+    return 'Clicked'
 
 ########################################################################
 

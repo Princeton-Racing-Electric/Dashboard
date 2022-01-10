@@ -11,6 +11,34 @@
       type="text/css"
       href="{{ url_for('static', filename='styles2.css')}}"
     />
+    <!-- style for putting divs in rows -->
+    <style> 
+      .container .box { 
+          width:540px; 
+          margin:50px; 
+          display:table; 
+      } 
+      .container .box .box-row { 
+          display:table-row; 
+      } 
+      .container .box .box-cell { 
+          display:table-cell; 
+          width:33%; 
+          padding:10px; 
+      } 
+      .container .box .box-cell.box1 { 
+          border: 2px solid white; 
+          text-align:justify; 
+      } 
+      .container .box .box-cell.box2 { 
+          border: 2px solid white; 
+          text-align:justify 
+      } 
+      .container .box .box-cell.box3 { 
+          border: 2px solid white;
+          text-align:justify; 
+      }
+  </style> 
 
     <!-- Necessary script for running jQuery. Which we use for AJAX -->
     <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
@@ -25,46 +53,87 @@
   </head>
 
     <!-- html script start -->
-    <body style = "background-color: #0B101F;">
-        <div class = "box">
-            <div class = "item">
+    <!-- test to center align -->
+    <body style = "background-color: #0B101F;"> 
+      <div class = "container"> 
+        <div class = "box"> 
+          <!-- first row -->
+          <div class = "box-row">
+            <div class = "box-cell box1">
+                <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
+                <div class = "center">
+                  <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
+                </div>
+            </div>
+            <div class = "box-cell box2">
+              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Mileage</h1>
+              <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;">2.54</p>
+            </div>
+            <div class = "box-cell box3">
+              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Battery</h1>
+              <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
+            </div>
+          </div>
+          <!-- end first row -->
+          <!-- second row -->
+          <div class = "box-row">
+            <div class = "box-cell box1">
+              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
+              <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
+            </div>
+            <div class = "box-cell box2">
+              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
+              <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;">2.54</p>
+            </div>
+            <div class = "box-cell box3" style="text-align:center">
+              <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
+              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;"> </a>
+            </div>
+          </div>
+          <!-- end second row -->
+        </div>
+      </div>
+
+    <!-- old code -->
+    <!-- <body style = "background-color: #0B101F;"> 
+        <div class = "parent">
+            <div class = "column">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
                 <div class = "center">
                   <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
                 </div>
               </div>
-              <div class = "item">
+              <div class = "column">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Mileage</h1>
                 <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;">2.54</p>
               </div>
-              <div class = "item">
+              <div class = "column">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Battery</h1>
                 <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
               </div>
         </div>
     
-        <div class = "box">
-            <div class = "two">
+        <div class = "parent">
+            <div class = "column">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
                 <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
               </div>
-              <div class = "two">
+              <div class = "column">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
                 <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;">2.54</p>
               </div>
-        </div>
-
-        <div>
-            <div class = "mydiv3">
-                <div>
-                  <img src="Car Mile.png" style="width:86px;height:95px;">
-                  <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Mileage Tracker </h1>
-                </div>
+              <div class = "column" style="text-align:center">
+                <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
+                <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;"> </a>
               </div>
+        </div> -->
+
+        <!-- <div class = "mydiv3">
+          <div>
+              <img src="Car Mile.png" style="width:86px;height:95px;">
+              <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Mileage Tracker </h1>
+          </div>
         </div>
-        <div>
-            <title>Test</title>
-            <a href="/test" > <img src="Restart Button.png" style="width:86px;height:95px;"></a>
-        </div>
+        -->
    </body>
  </html>
