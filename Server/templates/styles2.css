@@ -10,6 +10,39 @@
     justify-content: space-between;
     background-color: #0B101F;
 }
+/* 2nd attempt - uses flex */
+.parent {
+    display: flex;
+    flex-direction:row;
+  }
+  
+.column {
+    flex: 1 1 0px;
+    border: 1px solid black;
+}
+
+/* Attempt to make row */
+.row:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.left {
+    float: left;
+    width: 100px;
+}
+
+.center {
+    margin: 0 auto;
+    width: 100px;
+}
+
+.right {
+    float: right;
+    width: 100px;
+}
+/* End of attempt */
 
 .item {
     width: 10rem;
