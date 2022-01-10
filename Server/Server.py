@@ -43,6 +43,7 @@ WHEEL_DIAMETER_IN = 20
 # GLOBAL VARIABLES 
 # for sensor data
 mph = 0
+accel = 0
 temperature = 0
 voltage = 0
 miles = 0
@@ -80,6 +81,17 @@ def get_speed() -> float:
     print(mph)
     return mph
 
+def get_accel() -> float:
+    num_interrupts = HallEffect.number_interrupts
+    prev_num_interrupts = HallEffect.previous_number_interrupts
+    accel = 0
+
+    if num_interrupts != prev_num_interrupts:
+        HallEffect.calculate_accel()
+        accel = HallEffect.accel
+
+    return accel
+
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
     return read_temp()[1]
@@ -100,6 +112,12 @@ def update_speed():
     global mph
     while running:
         mph = get_speed()
+        time.sleep(DELAY_TIME)
+
+def update_accel():
+    global accel
+    while running:
+        accel = get_accel()
         time.sleep(DELAY_TIME)
 
 
@@ -146,6 +164,7 @@ t2 = Thread(target=update_speed)
 t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
+t6 = Thread(target=update_accel)
 
 ########################################################################
 
@@ -167,6 +186,7 @@ def update():
         {
             "value": counter,
             "mph": mph,
+            "acceleration": accel,
             "temperature": temperature,
             "voltage": voltage,
             "mileage": miles,
@@ -211,4 +231,5 @@ if __name__ == "__main__":
     t3.start()
     t4.start()
     t5.start()
+    t6.start()
     app.run(debug=True)
