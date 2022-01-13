@@ -12,9 +12,10 @@
       href="{{ url_for('static', filename='styles2.css')}}"
     />
     <!-- style for putting divs in rows -->
+    <!-- old width 540px -->
     <style> 
       .container .box { 
-          width:540px; 
+          width: 94%;  
           margin:50px; 
           display:table; 
       } 
@@ -37,6 +38,15 @@
       .container .box .box-cell.box3 { 
           border: 2px solid white;
           text-align:justify; 
+      }
+
+      #wrap {
+        display: flex;
+        justify-content: center;
+      }
+
+      #left, #right {
+        padding: 2%;
       }
   </style> 
 
@@ -61,17 +71,36 @@
           <div class = "box-row">
             <div class = "box-cell box1">
                 <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
-                <div class = "center">
-                  <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
+                <div id = "wrap">
+                  <div id="left"> 
+                    <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
+                  </div>
+                  <div id="right" style="margin-top: 67px;"> 
+                    <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p> 
+                  </div>
                 </div>
             </div>
             <div class = "box-cell box2">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Mileage</h1>
-              <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;">2.54</p>
+              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Distance</h1>
+              <div id = "wrap">
+                <div id="left"> 
+                  <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;">2.54</p>
+                </div>
+                <div id="right" style="margin-top: 67px;"> 
+                  <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">mi</p> 
+                </div>
+              </div>
             </div>
             <div class = "box-cell box3">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Battery</h1>
-              <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
+              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">GLV Voltage</h1>
+              <div id = "wrap">
+                <div id="left"> 
+                  <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
+                </div>
+                <div id="right" style="margin-top: 67px;"> 
+                  <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">V</p>  
+                </div>
+              </div>
             </div>
           </div>
           <!-- end first row -->
@@ -79,20 +108,43 @@
           <div class = "box-row">
             <div class = "box-cell box1">
               <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
-              <p style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;">2.54</p>
+              <div id = "wrap">
+                <div id="left"> 
+                  <p style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;">2.54</p>
+                </div>
+                <div id="right" style="margin-top: 67px;"> 
+                  <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>  
+                </div>
+              </div>
             </div>
             <div class = "box-cell box2">
               <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
-              <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;">2.54</p>
+              <div id = "wrap">
+                <div id="left"> 
+                  <p style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;">2.54</p> 
+                </div>
+                <div id="right" style="margin-top: 67px;"> 
+                  <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px;">m/s&#178</p> 
+                </div>
+              </div>
             </div>
             <div class = "box-cell box3" style="text-align:center">
               <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
-              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;"> </a>
+              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
             </div>
           </div>
           <!-- end second row -->
-        </div>
+        </div> 
       </div>
+    
+    <!-- manual center -->
+    <!-- <div style="float: left; margin:0px;margin-left: 25%"> 
+            <p style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;">2.54</p>
+          </div>
+          <div style="float: left; margin:0px; margin-top: 67px; margin-left:3px;"> 
+            <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>  
+          </div>
+    -->
 
     <!-- old code -->
     <!-- <body style = "background-color: #0B101F;"> 
@@ -134,6 +186,6 @@
               <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Mileage Tracker </h1>
           </div>
         </div>
-        -->
+      -->
    </body>
  </html>
