@@ -15,9 +15,9 @@ setInterval(function () {
       console.log(response);
       $("#speed").html(Math.round(100*response["mph"])/100);
       $("#temperature").html(Math.round(100*response["temperature"])/100);
-      $("#_______").html(Math.round(100*response["acceleration"])/100);
-      $("#_______").html(Math.round(100*response["voltage"])/100);
-      $("#_______").html(Math.round(100*response["mileage"])/100);
+      $("#acceleration").html(Math.round(100*response["acceleration"])/100);
+      $("#voltage").html(Math.round(100*response["voltage"])/100);
+      $("#mileage").html(Math.round(100*response["mileage"])/100);
     },
     error: function (error) {
       console.log(error);
