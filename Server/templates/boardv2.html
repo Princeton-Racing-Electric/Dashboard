@@ -130,12 +130,27 @@
             </div>
             <div class = "box-cell box3" style="text-align:center">
               <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
-              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
+              <a href="/restart" style= "text-align: center;"> <img id = "picture" src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
             </div>
           </div>
           <!-- end second row -->
         </div> 
       </div>
+
+      <script>
+        let x = 5;
+        const event = new Event("start");
+        document.addEventListener('start', changePic);
+        
+        function changePic(){
+          document.getElementById("picture").src = "Car Mile.png"
+          alert("Hello World");
+        }
+
+        if (x == 5){
+          document.dispatchEvent(event);
+        }
+      </script> 
     
     <!-- manual center -->
     <!-- <div style="float: left; margin:0px;margin-left: 25%"> 
