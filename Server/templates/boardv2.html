@@ -78,6 +78,7 @@
                   <div id="right" style="margin-top: 67px;"> 
                     <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p> 
                   </div>
+                  <img id = "picture" src="Green_Temp_Icon.png" style="width:21px;height:42px;margin-top: 25px;">
                 </div>
             </div>
             <div class = "box-cell box2">
@@ -130,7 +131,7 @@
             </div>
             <div class = "box-cell box3" style="text-align:center">
               <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
-              <a href="/restart" style= "text-align: center;"> <img id = "picture" src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
+              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
             </div>
           </div>
           <!-- end second row -->
@@ -143,7 +144,7 @@
         document.addEventListener('start', changePic);
         
         function changePic(){
-          document.getElementById("picture").src = "Car Mile.png"
+          document.getElementById("picture").src = "Red_Temp_Icon"
           alert("Hello World");
         }
 
