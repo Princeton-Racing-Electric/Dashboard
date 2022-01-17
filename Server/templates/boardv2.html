@@ -78,8 +78,8 @@
                   <div id="right" style="margin-top: 67px;"> 
                     <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p> 
                   </div>
-                  <img id = "picture" src="Green_Temp_Icon.png" style="width:21px;height:42px;margin-top: 25px;">
                 </div>
+                <img id = "temp_picture" src="Green_Temp_Icon.png" style="width:21px;height:42px;">
             </div>
             <div class = "box-cell box2">
               <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Distance</h1>
@@ -144,7 +144,7 @@
         document.addEventListener('start', changePic);
         
         function changePic(){
-          document.getElementById("picture").src = "Red_Temp_Icon"
+          document.getElementById("temp_picture").src = "Red_Temp_Icon"
           alert("Hello World");
         }
 
