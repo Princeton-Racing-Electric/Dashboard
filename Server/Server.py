@@ -26,6 +26,7 @@ Run this application by:
 from datetime import datetime
 from flask import Flask, render_template, jsonify
 from threading import Thread
+from playsound import playsound
 import time, math
 import signal
 
@@ -166,7 +167,17 @@ t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
 
-########################################################################
+######################################################
+# function to play sound  -- need to set variables, find wav files, and temperature/battery limits
+def playSound(battery, temperature):
+    if (battery > 1): 
+        wavFile = input("Enter a wav filename:")
+        playsound(wavFile)
+    if (temperature > 1):
+        wavFile = input("Enter a wav filename:")
+        playsound(wavFile)
+
+##############################################################
 
 # FLASK SERVER #########################################################
 # Creates a flask app (which is just an instance of the Flask class)
