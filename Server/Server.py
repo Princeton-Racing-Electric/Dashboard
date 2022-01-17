@@ -169,8 +169,8 @@ t6 = Thread(target=update_accel)
 
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
-def playSound(battery, temperature):
-    if (battery > 1): 
+def playSound(voltage, temperature):
+    if (voltage > 1): 
         wavFile = input("Enter a wav filename:")
         playsound(wavFile)
     if (temperature > 1):
