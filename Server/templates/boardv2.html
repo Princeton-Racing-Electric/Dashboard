@@ -141,15 +141,23 @@
 
       <script>
         let x = 5;
-        const event = new Event("start");
-        document.addEventListener('start', changePic);
+        const event_temp = new Event("start_temp");
+        const event_battery = new Event("start_battery");
+
+        document.addEventListener('start_temp', changePicTemp);
+        document.addEventListener('start_battery', changePicBattery);
         
-        function changePic(){
+        function changePicTemp(){
           document.getElementById("temp_picture").src = "Red_Temp_Icon.png"
         }
 
+        function changePicBattery(){
+          document.getElementById("battery_picture").src = "Red_Battery_Icon.png"
+        }
+
         if (x == 5){
-          document.dispatchEvent(event);
+          document.dispatchEvent(event_temp);
+          document.dispatchEvent(event_battery);
         }
       </script> 
     
