@@ -150,6 +150,17 @@ def increment_var():
     while running:
         counter = counter + 1
         time.sleep(DELAY_TIME)
+
+######################################################
+# function to play sound  -- need to set variables, find wav files, and temperature/battery limits
+def playSound(voltage, temperature):
+    if (voltage > 1): 
+        wavFile = input("Enter a wav filename:")
+        playsound(wavFile)
+    if (temperature > 1):
+        wavFile = input("Enter a wav filename:")
+        playsound(wavFile)
+
 ##############################
 
 
@@ -166,16 +177,6 @@ t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
-
-######################################################
-# function to play sound  -- need to set variables, find wav files, and temperature/battery limits
-def playSound(voltage, temperature):
-    if (voltage > 1): 
-        wavFile = input("Enter a wav filename:")
-        playsound(wavFile)
-    if (temperature > 1):
-        wavFile = input("Enter a wav filename:")
-        playsound(wavFile)
 
 ##############################################################
 
