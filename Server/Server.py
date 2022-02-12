@@ -64,9 +64,9 @@ def handle_keyboard_int(signal, stack_frame):
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
 import webbrowser, os, sys
-    url = "https://127.0.0.1:5000/"
-    chrome_path = '/usr/lib/chromium-browser/chromium-browser'
-    webbrowser.get(chrome_path).open(url)
+url = "https://127.0.0.1:5000/"
+chrome_path = '/usr/lib/chromium-browser/chromium-browser'
+webbrowser.get(chrome_path).open(url)
 
 # MAYBE: we could make a sensors class that encapsulates all the needed
 # code for the sensors, then we can just create an instance of that here
