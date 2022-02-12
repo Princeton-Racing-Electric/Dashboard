@@ -222,6 +222,7 @@ def restart():
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
+    subprocess.run("shutdown -h 0", shell=True, check=True)
     print(output)
 
 ########################################################################
