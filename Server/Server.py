@@ -245,9 +245,9 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
-    app.run(host='127.0.0.1', port = 5000, debug=True)
-    command = "chromium-browser https://127.0.0.1:5000"
-    import subprocess
-    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-    output = process.communicate()[0]
-    print(output)
+    #app.run(host='127.0.0.1', port = 5000, debug=True)
+    #command = "chromium-browser https://127.0.0.1:5000"
+    #import subprocess
+    #process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    #output = process.communicate()[0]
+    #print(output)
