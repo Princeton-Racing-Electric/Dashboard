@@ -63,6 +63,10 @@ def handle_keyboard_int(signal, stack_frame):
 # Link handle_keyboard_int function to a SIGINT signal (ctrl-c)
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
+import webbrowser, os, sys
+    url = "https://127.0.0.1:5000/"
+    chrome_path = '/usr/lib/chromium-browser/chromium-browser'
+    webbrowser.get(chrome_path).open(url)
 
 # MAYBE: we could make a sensors class that encapsulates all the needed
 # code for the sensors, then we can just create an instance of that here
@@ -246,10 +250,6 @@ if __name__ == "__main__":
     t5.start()
     t6.start()
     app.run(host='127.0.0.1', port = 5000, debug=True)
-    import webbrowser, os, sys
-    url = "https://127.0.0.1:5000/"
-    chrome_path = '/usr/lib/chromium-browser/chromium-browser'
-    webbrowser.get(chrome_path).open(url)
     #command = "chromium-browser https://127.0.0.1:5000"
     #import subprocess
     #process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
