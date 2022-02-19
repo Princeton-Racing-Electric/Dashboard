@@ -3,5 +3,5 @@
 
 cd / 
 cd home/pi/Desktop/Dashboard/Server
-sudo python Server.py
+sudo python3 Server.py
 cd /
