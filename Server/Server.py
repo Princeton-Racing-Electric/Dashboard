@@ -24,6 +24,7 @@ Run this application by:
 # to use the command line we can figure that out too
 
 from datetime import datetime
+from doctest import Example
 from flask import Flask, render_template, jsonify
 from threading import Thread
 #from playsound import playsound
@@ -240,8 +241,6 @@ def restart():
 
 
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=8080)
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
     Voltage.init()
