@@ -65,7 +65,7 @@ def handle_keyboard_int(signal, stack_frame):
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
 import webbrowser, os, sys
-url = "https://127.0.0.1:5000"
+url = "https://127.0.0.1:5000/"
 chrome_path = '/usr/lib/chromium-browser/chromium-browser'
 webbrowser.get(chrome_path).open(url)
 
