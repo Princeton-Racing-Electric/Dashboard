@@ -251,8 +251,7 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
-    webbrowser.open_new('http://127.0.0.1:2000/')
-    app.run(port=2000, debug=True)
+    app.run(debug=True)
     # app.run(host='127.0.0.1', port = 5000, debug=True)  
     #command = "chromium-browser https://127.0.0.1:5000"
     #import subprocess
