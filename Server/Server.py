@@ -36,6 +36,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
+import webbrowser # open a webbrowser
 from Temperature import read_temp 
 
 # Constants
@@ -65,7 +66,7 @@ def handle_keyboard_int(signal, stack_frame):
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
 import webbrowser, os, sys
-url = "https://127.0.0.1:5000/"
+url = "http://127.0.0.1:5000/"
 chrome_path = '/usr/lib/chromium-browser/chromium-browser'
 webbrowser.get(chrome_path).open(url)
 
@@ -250,7 +251,8 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
-    app.run(debug=True)
+    webbrowser.open_new('http://127.0.0.1:2000/')
+    app.run(port=2000, debug=True)
     # app.run(host='127.0.0.1', port = 5000, debug=True)  
     #command = "chromium-browser https://127.0.0.1:5000"
     #import subprocess
