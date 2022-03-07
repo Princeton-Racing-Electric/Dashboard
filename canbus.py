@@ -12,7 +12,7 @@ class PCANBus(object):
     RX_SDO = 0x600
     TX_SDO = 0x580
     RX_PDO = 0x200
-    TX_PDO = 0x0160
+    TX_PDO = 0x180
 
     id_unit_a = [120, 121, 122, 123]
     id_unit_b = [124, 125, 126, 127]
