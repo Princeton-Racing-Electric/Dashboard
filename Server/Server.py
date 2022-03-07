@@ -105,7 +105,7 @@ def get_temp() -> float:
 
 def get_volt() -> float:
     ad_value = Voltage.readadc(Voltage.AO_pin, Voltage.SPICLK, Voltage.SPIMOSI, Voltage.SPIMISO, Voltage.SPICS)
-    return ad_value * (3.3 / 1024) * 5
+    return ((ad_value * (3.3 / 1024) * 5) / 12) * 100
 
 def get_miles() -> float:
     miles = HallEffect.number_interrupts * WHEEL_DIAMETER_IN * math.pi / 63360
