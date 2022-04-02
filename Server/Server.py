@@ -101,6 +101,7 @@ def get_accel() -> float:
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
+    print(readtemp()[1])
     return read_temp()[1]
 
 def get_volt() -> float:
