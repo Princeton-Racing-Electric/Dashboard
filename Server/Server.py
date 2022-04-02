@@ -224,11 +224,14 @@ def test():
 # runs the bash script sudo shutdown -r now
 @app.route("/restart")
 def restart():
+    os.system("sudo reboot")
+
+def restart2():
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
-    # subprocess.run("shutdown -h 0", shell=True, check=True)
+    subprocess.run("shutdown -h 0", shell=True, check=True)
     print(output)
 
 ########################################################################
