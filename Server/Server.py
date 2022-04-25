@@ -30,7 +30,7 @@ from threading import Thread
 from playsound import playsound
 import time, math
 import signal
-
+import can
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -42,6 +42,7 @@ from Temperature import read_temp
 # Constants
 DELAY_TIME = 1
 WHEEL_DIAMETER_IN = 20
+nodeID = 1
 
 # GLOBAL VARIABLES 
 # for sensor data
@@ -54,6 +55,9 @@ miles = 0
 counter = 0
 running = True
 
+# for can
+can0 = can.interface.Bus(channel='can0', bustype='socketcan_ctypes') #might need to change to pcan
+
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
 def handle_keyboard_int(signal, stack_frame):
@@ -61,6 +65,9 @@ def handle_keyboard_int(signal, stack_frame):
     running = False
     raise KeyboardInterrupt()
 
+def can_init():
+    os.system('sudo ip link set can0 type can bitrate 1000000')
+    os.system('sudo ifconfig can0 up')
 
 # Link handle_keyboard_int function to a SIGINT signal (ctrl-c)
 signal.signal(signal.SIGINT, handle_keyboard_int)
@@ -77,14 +84,17 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    num_interrupts = HallEffect.number_interrupts
-    prev_num_interrupts = HallEffect.previous_number_interrupts
-    mph = 0
+    #num_interrupts = HallEffect.number_interrupts
+    #prev_num_interrupts = HallEffect.previous_number_interrupts
+    #mph = 0
 
-    if num_interrupts != prev_num_interrupts:
-        HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
-        mph = HallEffect.mph
-
+    #if num_interrupts != prev_num_interrupts:
+    #    HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
+    #    mph = HallEffect.mph
+    msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], extended_id=False)
+    can0.send(msgS)
+    msgR = can0.recv(30.0)
+    mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
     print(mph)
     return mph
 
@@ -248,6 +258,7 @@ if __name__ == "__main__":
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
     Voltage.init()
+    can.init()
     t1.start()
     t2.start()
     t3.start()
