@@ -27,7 +27,7 @@ from datetime import datetime
 from doctest import Example
 from flask import Flask, render_template, jsonify
 from threading import Thread
-#from playsound import playsound
+from playsound import playsound
 import time, math
 import signal
 
@@ -159,7 +159,7 @@ def increment_var():
 
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
-def playSound(voltage, temperature):
+def playSound():
     if (voltage > 1): 
         wavFile = input("Enter a wav filename:")
         playsound(wavFile)
