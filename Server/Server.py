@@ -94,6 +94,7 @@ def get_speed() -> float:
     msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], extended_id=False)
     can0.send(msgS)
     msgR = can0.recv(30.0)
+    print(msgR)
     mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
     print(mph)
     return mph
