@@ -176,14 +176,14 @@ def playSoundVolt():
         #wavFile = input("Enter a wav filename:")
         playsound('voltage_alert.wav')
         print("playing voltage sound w/ .wav")
-        Timer(5, playSoundVolt).start()
+    Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
     if (temperature > 80):
         playsound('temperature_alert.wav')
         print("playing temperature sound w. .wav")
-        Timer(60, playSoundTemp).start()
+    Timer(60, playSoundTemp).start()
 
 ##############################
 playSoundVolt()
