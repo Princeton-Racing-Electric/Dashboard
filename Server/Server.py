@@ -26,13 +26,14 @@ Run this application by:
 from datetime import datetime
 from doctest import Example
 from flask import Flask, render_template, jsonify
-from threading import Thread
+from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
 import can
 import sys
 import os
+import schedule
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
@@ -172,13 +173,15 @@ def increment_var():
 def playSoundVolt():
     if (voltage > 1): 
         #wavFile = input("Enter a wav filename:")
-        playsound(wavFile)
+        playsound('voltage_alert.wav')
         print("playing voltage sound w/ .wav")
+
 
 def playSoundTemp():
     if (temperature > 1):
-        playsound(wavFile)
+        playsound('temperature_alert.wav')
         print("playing temperature sound w. .wav")
+        Timer(5, playSoundTemp).start()
 
 ##############################
 
@@ -196,6 +199,10 @@ t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
+
+##############################################################
+# To call playSound function continously 
+#schedule.every(1).minutes.do(playSoundVolt)
 
 ##############################################################
 
