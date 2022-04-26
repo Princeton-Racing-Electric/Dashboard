@@ -186,9 +186,6 @@ def playSoundTemp():
     Timer(60, playSoundTemp).start()
 
 ##############################
-playSoundVolt()
-playSoundTemp()
-
 # Create a global variable and a thread for updating it
 # When transferring this same kinda logic over to the data from the
 # sensors, we would probably just do the same thing but with global
@@ -206,6 +203,8 @@ t6 = Thread(target=update_accel)
 ##############################################################
 # To call playSound function continously 
 #schedule.every(1).minutes.do(playSoundVolt)
+playSoundVolt()
+playSoundTemp()
 
 ##############################################################
 
