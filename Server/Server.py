@@ -172,20 +172,22 @@ def increment_var():
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
 def playSoundVolt():
-    if (voltage > 1): 
+    if (voltage < 10): 
         #wavFile = input("Enter a wav filename:")
         playsound('voltage_alert.wav')
         print("playing voltage sound w/ .wav")
+        Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
-    if (temperature > 1):
+    if (temperature > 80):
         playsound('temperature_alert.wav')
         print("playing temperature sound w. .wav")
-        Timer(5, playSoundTemp).start()
+        Timer(60, playSoundTemp).start()
 
 ##############################
-
+playSoundVolt()
+playSoundTemp()
 
 # Create a global variable and a thread for updating it
 # When transferring this same kinda logic over to the data from the
