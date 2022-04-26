@@ -21,6 +21,8 @@ def playSoundTemp():
         print("playing temperature sound w. .wav")
     Timer(60, playSoundTemp).start()
     print('play sound temperature')
+    
+    ## TRY FULL PATH FOR PHOTO
 
 playSoundVolt()
 playSoundTemp()
