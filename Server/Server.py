@@ -174,14 +174,14 @@ def increment_var():
 def playSoundVolt():
     if (voltage < 10): 
         #wavFile = input("Enter a wav filename:")
-        playsound('/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
+        playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         print("playing voltage sound w/ .wav")
     Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
     if (temperature > 80):
-        playsound('/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
+        playsound(r'/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         print("playing temperature sound w. .wav")
     Timer(60, playSoundTemp).start()
 
