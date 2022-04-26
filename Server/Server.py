@@ -57,7 +57,7 @@ counter = 0
 running = True
 
 # for can
-can0 = can.interface.Bus(channel='can0', bustype='socketcan_ctypes') #might need to change to pcan
+can0 = can.interface.Bus(channel='can0', bustype='socketcan') #might need to change to pcan
 
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
@@ -92,13 +92,13 @@ def get_speed() -> float:
     #if num_interrupts != prev_num_interrupts:
     #    HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
     #    mph = HallEffect.mph
-    msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], extended_id=False)
-    can0.send(msgS)
-    msgR = can0.recv(30.0)
-    print(msgR)
-    mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
-    print(mph)
-    return mph
+    #msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], is_extended_id=False)
+    #can0.send(msgS)
+    #msgR = can0.recv(30.0)
+    #print(msgR)
+    #mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
+    #print(mph)
+    return 0
 
 def get_accel() -> float:
     num_interrupts = HallEffect.number_interrupts
@@ -270,7 +270,7 @@ if __name__ == "__main__":
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
     Voltage.init()
-    can.init()
+    #can_init()
     t1.start()
     t2.start()
     t3.start()
