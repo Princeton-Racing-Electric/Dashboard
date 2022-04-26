@@ -30,9 +30,9 @@ from threading import Thread
 #from playsound import playsound
 import time, math
 import signal
-import can
 import sys
 import os
+import can
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
