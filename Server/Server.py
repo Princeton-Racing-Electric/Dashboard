@@ -33,7 +33,6 @@ import signal
 import can
 import sys
 import os
-import schedule
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
