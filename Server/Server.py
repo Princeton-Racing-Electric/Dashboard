@@ -30,7 +30,7 @@ from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
-import can
+#import can
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -56,7 +56,7 @@ counter = 0
 running = True
 
 # for can
-can0 = can.interface.Bus(channel='can0', bustype='socketcan') #might need to change to pcan
+#can0 = can.interface.Bus(channel='can0', bustype='socketcan') #might need to change to pcan
 
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
