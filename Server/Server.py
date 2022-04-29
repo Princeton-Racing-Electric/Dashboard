@@ -171,7 +171,7 @@ def increment_var():
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
 def playSoundVolt():
-    if (voltage < 10): 
+    if (voltage < 20): # under 20%
         #wavFile = input("Enter a wav filename:")
         #playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         os.system('omxplayer /home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
