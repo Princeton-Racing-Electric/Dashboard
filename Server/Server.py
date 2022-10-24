@@ -30,9 +30,13 @@ from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
+<<<<<<< HEAD
+=======
 #import can
+>>>>>>> 2786476e930a8272d061efa9c52f47f8c681fd25
 import sys
 import os
+import can
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
@@ -171,12 +175,13 @@ def increment_var():
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
 def playSoundVolt():
-    if (voltage < 10): 
+    print(voltage)
+    if (voltage < 20): # under 20%
         #wavFile = input("Enter a wav filename:")
         #playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         os.system('omxplayer /home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         print("playing voltage sound w/ .wav")
-    Timer(5, playSoundVolt).start()
+    #Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
@@ -184,7 +189,7 @@ def playSoundTemp():
         #playsound(r'/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         os.system('/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         print("playing temperature sound w. .wav")
-    Timer(60, playSoundTemp).start()
+   # Timer(60, playSoundTemp).start()
 
 ##############################
 # Create a global variable and a thread for updating it
