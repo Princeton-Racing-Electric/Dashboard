@@ -177,7 +177,7 @@ def playSoundVolt():
         #playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         os.system('omxplayer /home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         print("playing voltage sound w/ .wav")
-    Timer(5, playSoundVolt).start()
+    #Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
@@ -185,7 +185,7 @@ def playSoundTemp():
         #playsound(r'/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         os.system('/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         print("playing temperature sound w. .wav")
-    Timer(60, playSoundTemp).start()
+   # Timer(60, playSoundTemp).start()
 
 ##############################
 # Create a global variable and a thread for updating it
