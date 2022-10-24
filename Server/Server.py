@@ -30,10 +30,9 @@ from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
-<<<<<<< HEAD
-=======
+
 #import can
->>>>>>> 2786476e930a8272d061efa9c52f47f8c681fd25
+
 import sys
 import os
 import can
@@ -209,8 +208,8 @@ t6 = Thread(target=update_accel)
 ##############################################################
 # To call playSound function continously 
 #schedule.every(1).minutes.do(playSoundVolt)
-playSoundVolt()
-playSoundTemp()
+#playSoundVolt()
+#playSoundTemp()
 
 ##############################################################
 
