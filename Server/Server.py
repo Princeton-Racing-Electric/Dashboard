@@ -26,10 +26,14 @@ Run this application by:
 from datetime import datetime
 from doctest import Example
 from flask import Flask, render_template, jsonify
-from threading import Thread
-#from playsound import playsound
+from threading import Thread, Timer
+from playsound import playsound
 import time, math
 import signal
+<<<<<<< HEAD
+=======
+#import can
+>>>>>>> 2786476e930a8272d061efa9c52f47f8c681fd25
 import sys
 import os
 import can
@@ -56,7 +60,7 @@ counter = 0
 running = True
 
 # for can
-can0 = can.interface.Bus(channel='can0', bustype='socketcan_ctypes') #might need to change to pcan
+#can0 = can.interface.Bus(channel='can0', bustype='socketcan') #might need to change to pcan
 
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
@@ -91,12 +95,13 @@ def get_speed() -> float:
     #if num_interrupts != prev_num_interrupts:
     #    HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
     #    mph = HallEffect.mph
-    msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], extended_id=False)
-    can0.send(msgS)
-    msgR = can0.recv(30.0)
-    mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
-    print(mph)
-    return mph
+    #msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], is_extended_id=False)
+    #can0.send(msgS)
+    #msgR = can0.recv(30.0)
+    #print(msgR)
+    #mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
+    #print(mph)
+    return 0
 
 def get_accel() -> float:
     num_interrupts = HallEffect.number_interrupts
@@ -169,17 +174,24 @@ def increment_var():
 
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
-def playSound(voltage, temperature):
-    if (voltage > 1): 
-        wavFile = input("Enter a wav filename:")
-        playsound(wavFile)
-    if (temperature > 1):
-        wavFile = input("Enter a wav filename:")
-        playsound(wavFile)
+def playSoundVolt():
+    print(voltage)
+    if (voltage < 20): # under 20%
+        #wavFile = input("Enter a wav filename:")
+        #playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
+        os.system('omxplayer /home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
+        print("playing voltage sound w/ .wav")
+    #Timer(5, playSoundVolt).start()
+
+
+def playSoundTemp():
+    if (temperature > 80):
+        #playsound(r'/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
+        os.system('/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
+        print("playing temperature sound w. .wav")
+   # Timer(60, playSoundTemp).start()
 
 ##############################
-
-
 # Create a global variable and a thread for updating it
 # When transferring this same kinda logic over to the data from the
 # sensors, we would probably just do the same thing but with global
@@ -193,6 +205,12 @@ t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
+
+##############################################################
+# To call playSound function continously 
+#schedule.every(1).minutes.do(playSoundVolt)
+playSoundVolt()
+playSoundTemp()
 
 ##############################################################
 
@@ -258,7 +276,7 @@ if __name__ == "__main__":
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
     Voltage.init()
-    can.init()
+    #can_init()
     t1.start()
     t2.start()
     t3.start()

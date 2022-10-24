@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Car Dashboard</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +12,7 @@
       type="text/css"
       href="{{ url_for('static', filename='styles2.css')}}"
     />
+
     <!-- style for putting divs in rows -->
     <!-- old width 540px -->
     <!-- height: 50; -->
@@ -50,7 +52,7 @@
       #left, #right {
         padding: 2%;
       }
-  </style> 
+    </style>
 
     <!-- Necessary script for running jQuery. Which we use for AJAX -->
     <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
@@ -64,115 +66,119 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Racing+Sans+One&display=swap" rel="stylesheet">
   </head>
 
-    <!-- html script start -->
-    <!-- test to center align -->
-    <body style = "background-color: #0B101F;"> 
-      <div class = "container"> 
-        <div class = "box"> 
-          <!-- first row -->
-          <div class = "box-row">
-            <div class = "box-cell box1">
-                <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
-                <div id = "wrap">
-                  <div id="left"> 
-                    <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
-                  </div>
-                  <div id="right" style="margin-top: 67px;"> 
-                    <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p> 
-                  </div>
-                </div>
-            </div>
-            <div class = "box-cell box2">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Distance</h1>
+  <!-- html script start -->
+  <!-- test to center align -->
+  <body style = "background-color: #0B101F;">
+    <div class = "container">
+      <div class = "box">
+        <!-- first row -->
+        <div class = "box-row">
+          <div class = "box-cell box1">
+              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
               <div id = "wrap">
-                <div id="left"> 
-                  <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;"></p>
+                <div id="left">
+                  <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
                 </div>
-                <div id="right" style="margin-top: 67px;"> 
-                  <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">mi</p> 
+                <div id="right" style="margin-top: 67px;">
+                  <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p>
+                  <img id="temp_picture" src="Green_Temp_Icon.png" alt="temperature picture" style="width:21px;height:42px;">
                 </div>
               </div>
-            </div>
-            <div class = "box-cell box3">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">GLV Voltage</h1>
-              <div id = "wrap">
-                <div id="left"> 
-                  <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
-                </div>
-                <div id="right" style="margin-top: 67px;"> 
-                  <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">%</p>  
-                </div>
+          </div>
+          <div class = "box-cell box2">
+            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Distance</h1>
+            <div id = "wrap">
+              <div id="left">
+                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;"></p>
+              </div>
+              <div id="right" style="margin-top: 67px;">
+                <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">mi</p>
               </div>
             </div>
           </div>
-          <!-- <img id = "battery_picture" src="Green_Battery_Icon.png" style="width:21px;height:42px;"> originally line 106-->
-          <!-- <img id = "temp_picture" src="Green_Temp_Icon.png" style="width:21px;height:42px;"> originally line 83-->
-          <!-- end first row -->
-          <!-- second row -->
-          <div class = "box-row">
-            <div class = "box-cell box1">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
-              <div id = "wrap">
-                <div id="left"> 
-                  <p id="speed" style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;"></p>
-                </div>
-                <div id="right" style="margin-top: 67px;"> 
-                  <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>  
-                </div>
+          <div class = "box-cell box3">
+            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Accumulator Charge</h1>
+            <div id = "wrap">
+              <div id="left">
+                <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
               </div>
-            </div>
-            <div class = "box-cell box2">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
-              <div id = "wrap">
-                <div id="left"> 
-                  <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;"></p> 
-                </div>
-                <div id="right" style="margin-top: 67px;"> 
-                  <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px;">m/s&#178</p> 
-                </div>
+              <div id="right" style="margin-top: 67px;">
+                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">%</p>
+                <img id="battery_picture" src="Green_Battery_Icon.png" alt="battery picture" style="width:21px;height:42px;">
               </div>
-            </div>
-            <div class = "box-cell box3" style="text-align:center">
-              <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
-              <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px; margin-bottom:-8px;">2 min restart</p> 
-              <a href="/restart" style= "text-align: center;"> <img src="Restart Button.png" style="width:86px;height:95px;margin-top: 25px;"> </a>
-              <!--"Restart Button.png" -->
             </div>
           </div>
-          <!-- end second row -->
-        </div> 
+        </div>
+
+        <!-- end first row -->
+        <!-- second row -->
+        <div class = "box-row">
+          <div class = "box-cell box1">
+            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
+            <div id = "wrap">
+              <div id="left">
+                <p id="speed" style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;"></p>
+              </div>
+              <div id="right" style="margin-top: 67px;">
+                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>
+              </div>
+            </div>
+          </div>
+          <div class = "box-cell box2">
+            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
+            <div id = "wrap">
+              <div id="left">
+                <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;"></p>
+              </div>
+              <div id="right" style="margin-top: 67px;">
+                <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px;">m/s&#178</p>
+              </div>
+            </div>
+          </div>
+          <div class = "box-cell box3" style="text-align:center">
+            <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
+            <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px; margin-bottom:-8px;">2 min restart</p>
+            <a href="/restart" style= "text-align: center;">
+              <img src="Restart_Button.png" alt="restart button" style="width:86px;height:95px;margin-top: 25px;">
+            </a>
+            <!--"Restart Button.png" -->
+          </div>
+        </div>
+        <!-- end second row -->
       </div>
+    </div>
 
-      <script>
-        let x = 4;
-        const event_temp = new Event("start_temp");
-        const event_battery = new Event("start_battery");
+    <script>
+      let x = 4;
+      const event_temp = new Event("start_temp");
+      const event_battery = new Event("start_battery");
 
-        document.addEventListener('start_temp', changePicTemp);
-        document.addEventListener('start_battery', changePicBattery);
-        
-        function changePicTemp(){
-          document.getElementById("temp_picture").src = "Red_Temp_Icon.png"
-        }
+      document.addEventListener('start_temp', changePicTemp);
+      document.addEventListener('start_battery', changePicBattery);
 
-        function changePicBattery(){
-          document.getElementById("battery_picture").src = "Red_Battery_Icon.png"
-        }
+      function changePicTemp(){
+        document.getElementById("temp_picture").src = "Red_Temp_Icon.png"
+      }
 
-        if (x == 5){
-          document.dispatchEvent(event_temp);
-          document.dispatchEvent(event_battery);
-        }
-      </script> 
-    
-    <!-- manual center -->
-    <!-- <div style="float: left; margin:0px;margin-left: 25%"> 
-            <p style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;">2.54</p>
-          </div>
-          <div style="float: left; margin:0px; margin-top: 67px; margin-left:3px;"> 
-            <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>  
-          </div>
-    -->
-   
-   </body>
- </html>
+      function changePicBattery(){
+        document.getElementById("battery_picture").src = "Red_Battery_Icon.png"
+      }
+
+      if (x == 5){
+        document.dispatchEvent(event_temp);
+        document.dispatchEvent(event_battery);
+      }
+    </script>
+ </body>
+
+</html>
+
+
+<!-- manual center -->
+<!-- <div style="float: left; margin:0px;margin-left: 25%">
+        <p style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;">2.54</p>
+      </div>
+      <div style="float: left; margin:0px; margin-top: 67px; margin-left:3px;">
+        <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>
+      </div>
+-->
