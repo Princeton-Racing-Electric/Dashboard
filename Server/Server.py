@@ -30,9 +30,12 @@ from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
+
 #import can
+
 import sys
 import os
+import can
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
@@ -177,7 +180,7 @@ def playSoundVolt():
         #playsound(r'/home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         os.system('omxplayer /home/pi/Desktop/Dashboard/Server/voltage_alert.wav')
         print("playing voltage sound w/ .wav")
-    Timer(5, playSoundVolt).start()
+    #Timer(5, playSoundVolt).start()
 
 
 def playSoundTemp():
@@ -185,7 +188,7 @@ def playSoundTemp():
         #playsound(r'/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         os.system('/home/pi/Desktop/Dashboard/Server/temperature_alert.wav')
         print("playing temperature sound w. .wav")
-    Timer(60, playSoundTemp).start()
+   # Timer(60, playSoundTemp).start()
 
 ##############################
 # Create a global variable and a thread for updating it
@@ -205,8 +208,8 @@ t6 = Thread(target=update_accel)
 ##############################################################
 # To call playSound function continously 
 #schedule.every(1).minutes.do(playSoundVolt)
-playSoundVolt()
-playSoundTemp()
+#playSoundVolt()
+#playSoundTemp()
 
 ##############################################################
 
