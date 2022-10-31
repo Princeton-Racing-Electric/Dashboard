@@ -206,7 +206,7 @@
         document.getElementById("battery_picture").src = "Red_Battery_Icon.png"
       }
 
-      if (x == 5){
+      if (volt > 5){
         document.dispatchEvent(event_temp);
         document.dispatchEvent(event_battery);
       }
