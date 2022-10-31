@@ -23,16 +23,32 @@
         width: 100%;
         height: 10%;
       }
-      .menuicon {
-        display: inline-block;
-        cursor: pointer;
+      .menu{
+        margin: 1em;
+        width: 40px;
       }
-      .bar1, .bar2, .bar3 {
-        width: 35px;
+      .menu:after,
+      .menu:before,
+      .menu div {
+        background-color:#fff;
+        border-radius: 3px;
+        content: '';
+        display: block;
         height: 5px;
-        background-color: #fff;
-        margin: 6px 0;
-        transition: 0.4s;
+        margin: 7px 0;
+        transition: all .2s ease-in-out;
+      }
+      /* Move the upper bar */
+      .menu:hover:before {
+        transform: translateY(12px) rotate(135deg);
+      }
+      /* Move the lower bar */
+      .menu:hover:after {
+        transform: translateY(-12px) rotate(-135deg);
+      }
+      /* Make the mid bar fade out */
+      .menu:hover div {
+        transform: scale(0);
       }
       .container .box { 
           width: 100%; 
@@ -87,11 +103,7 @@
   <body style = "background-color: #0B101F;">
     <div class = "container">
       <div class="menubar">
-        <div class="menuicon" onclick="myFunction(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
+        <div class="menu"></div>
       </div>
       <div class = "box">
         <!-- first row -->
@@ -100,10 +112,10 @@
               <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 24px;">Temperature</h1>
               <div id = "wrap">
                 <div id="left">
-                  <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
+                  <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;"></p>
                 </div>
                 <div id="right" style="margin-top: 67px;">
-                  <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">&#176C</p>
+                  <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">&#176C</p>
                   <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">
                 </div>
               </div>
@@ -112,10 +124,10 @@
             <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;">Distance</h1>
             <div id = "wrap">
               <div id="left">
-                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;"></p>
+                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 54px;"></p>
               </div>
               <div id="right" style="margin-top: 67px;">
-                <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 15px;">mi</p>
+                <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">mi</p>
               </div>
             </div>
           </div>
@@ -123,10 +135,10 @@
             <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 24px;">Accumulator Charge</h1>
             <div id = "wrap">
               <div id="left">
-                <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
+                <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;"></p>
               </div>
               <div id="right" style="margin-top: 67px;">
-                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">%</p>
+                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 17px;">%</p>
                 <img id="battery_picture" src="{{url_for('static', filename='Green_Battery_Icon.png')}}" alt="battery picture" style="width:21px;height:42px;">
               </div>
             </div>
@@ -141,10 +153,10 @@
             <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 24px;">Velocity</h1>
             <div id = "wrap">
               <div id="left">
-                <p id="speed" style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;"></p>
+                <p id="speed" style="color:white; font-family: 'Racing Sans One', cursive; font-size: 54px;"></p>
               </div>
               <div id="right" style="margin-top: 67px;">
-                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>
+                <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 17px;">mph</p>
               </div>
             </div>
           </div>
@@ -152,15 +164,23 @@
             <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;">Acceleration</h1>
             <div id = "wrap">
               <div id="left">
-                <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;"></p>
+                <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 54px;"></p>
               </div>
               <div id="right" style="margin-top: 67px;">
-                <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px;">m/s&#178</p>
+                <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 17px;">m/s&#178</p>
               </div>
             </div>
           </div>
           <div class = "box-cell box3" style="text-align:center">
-            <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;"> Restart Button </h1>
+            <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;"> Efficiency </h1>
+            <div id = "wrap">
+              <div id="left">
+                <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 54px;"></p>
+              </div>
+              <div id="right" style="margin-top: 67px;">
+                <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 17px;">%</p>
+              </div>
+            </div>
             <a href="/restart" style= "text-align: center;"> <img src="{{url_for('static', filename='Restart Button.png')}}"/> </a>
             <!--"Restart Button.png" -->
           </div>
@@ -171,6 +191,7 @@
 
     <script>
       let x = 4;
+      
       const event_temp = new Event("start_temp");
       const event_battery = new Event("start_battery");
 
