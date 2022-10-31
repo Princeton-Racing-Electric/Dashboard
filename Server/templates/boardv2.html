@@ -30,7 +30,7 @@
       .bar1, .bar2, .bar3 {
         width: 35px;
         height: 5px;
-        background-color: #333;
+        background-color: #fff;
         margin: 6px 0;
         transition: 0.4s;
       }
@@ -57,7 +57,7 @@
       } 
       .container .box .box-cell { 
           display:table-cell; 
-          width:33%; 
+          width:30%; 
           padding:10px; 
       } 
       .container .box .box-cell.box1 { 
@@ -100,7 +100,7 @@
   <body style = "background-color: #0B101F;">
     <div class = "container">
       <div class="menubar">
-        <div class="menu" onclick="myFunction(this)">
+        <div class="menu" onclick="toggleMenu(this)">
           <div class="bar1"></div>
           <div class="bar2"></div>
           <div class="bar3"></div>
@@ -117,7 +117,7 @@
                 </div>
                 <div id="right">
                   <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">&#176C</p>
-                  <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:49px;height:42px;">
+                  <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">
                 </div>
               </div>
           </div>
@@ -140,7 +140,8 @@
               </div>
               <div id="right">
                 <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 17px;">%</p>
-                <img id="battery_picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture" style="width:21px;height:42px;">
+                <br>
+                <img id="battery_picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture" style="width:49px;height:22px;">
               </div>
             </div>
             
@@ -192,7 +193,7 @@
 
     <script>
       let x = 4;
-      let volt = document.getElementById("voltage").value;
+      let volt = parseFloat(document.getElementById('voltage').value);
       const event_battery = new Event("start_battery");
 
       document.addEventListener('start_battery', changePicBattery);
@@ -203,6 +204,9 @@
 
       if (volt > 5){
         document.dispatchEvent(event_battery);
+      }
+      function toggleMenu(x) {
+        x.classList.toggle("change");
       }
     </script>
  </body>
