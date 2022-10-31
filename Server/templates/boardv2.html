@@ -203,7 +203,7 @@
       }
 
       function changePicBattery(){
-        document.getElementById("battery_picture").src = "Red_Battery_Icon.png"
+        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}"
       }
 
       if (volt > 5){
