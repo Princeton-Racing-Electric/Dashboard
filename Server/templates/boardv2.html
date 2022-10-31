@@ -24,31 +24,28 @@
         height: 10%;
       }
       .menu{
-        margin: 1em;
-        width: 40px;
+        float: right;
+        cursor: pointer;
       }
-      .menu:after,
-      .menu:before,
-      .menu div {
-        background-color:#fff;
-        border-radius: 3px;
-        content: '';
-        display: block;
+      .bar1, .bar2, .bar3 {
+        width: 35px;
         height: 5px;
-        margin: 7px 0;
-        transition: all .2s ease-in-out;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
       }
-      /* Move the upper bar */
-      .menu:hover:before {
-        transform: translateY(12px) rotate(135deg);
+
+      /* Rotate first bar */
+      .change .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
       }
-      /* Move the lower bar */
-      .menu:hover:after {
-        transform: translateY(-12px) rotate(-135deg);
-      }
-      /* Make the mid bar fade out */
-      .menu:hover div {
-        transform: scale(0);
+
+      /* Fade out the second bar */
+      .change .bar2 {opacity: 0;}
+
+      /* Rotate last bar */
+      .change .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
       }
       .container .box { 
           width: 100%; 
@@ -103,7 +100,11 @@
   <body style = "background-color: #0B101F;">
     <div class = "container">
       <div class="menubar">
-        <div class="menu"></div>
+        <div class="menu" onclick="myFunction(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
       </div>
       <div class = "box">
         <!-- first row -->
@@ -116,7 +117,7 @@
                 </div>
                 <div id="right">
                   <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">&#176C</p>
-                  <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">
+                  <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:49px;height:42px;">
                 </div>
               </div>
           </div>
@@ -191,23 +192,16 @@
 
     <script>
       let x = 4;
-      let volt = document.getElementById("voltage");
-      const event_temp = new Event("start_temp");
+      let volt = document.getElementById("voltage").value;
       const event_battery = new Event("start_battery");
 
-      document.addEventListener('start_temp', changePicTemp);
       document.addEventListener('start_battery', changePicBattery);
 
-      function changePicTemp(){
-        document.getElementById("temp_picture").src = "Red_Temp_Icon.png"
-      }
-
       function changePicBattery(){
-        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}"
+        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_20.png')}}"
       }
 
       if (volt > 5){
-        document.dispatchEvent(event_temp);
         document.dispatchEvent(event_battery);
       }
     </script>
