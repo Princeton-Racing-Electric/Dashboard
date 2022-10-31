@@ -19,8 +19,24 @@
     <!-- margin:50px; -->
     <!-- padding:10px; under .container .box .box-cell-->
     <style> 
+      .menubar {
+        width: 100%;
+        height: 10%;
+      }
+      .menuicon {
+        display: inline-block;
+        cursor: pointer;
+      }
+      .bar1, .bar2, .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: #fff;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
       .container .box { 
           width: 100%; 
+          height: 90%;
           display:table; 
       } 
       .container .box .box-row { 
@@ -70,11 +86,18 @@
   <!-- test to center align -->
   <body style = "background-color: #0B101F;">
     <div class = "container">
+      <div class="menubar">
+        <div class="menuicon" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+      </div>
       <div class = "box">
         <!-- first row -->
         <div class = "box-row">
           <div class = "box-cell box1">
-              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 18px;">Temperature</h1>
+              <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 24px;">Temperature</h1>
               <div id = "wrap">
                 <div id="left">
                   <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
@@ -86,7 +109,7 @@
               </div>
           </div>
           <div class = "box-cell box2">
-            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Distance</h1>
+            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;">Distance</h1>
             <div id = "wrap">
               <div id="left">
                 <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center;font-size: 50px;"></p>
@@ -97,7 +120,7 @@
             </div>
           </div>
           <div class = "box-cell box3">
-            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Accumulator Charge</h1>
+            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 24px;">Accumulator Charge</h1>
             <div id = "wrap">
               <div id="left">
                 <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 50px;"></p>
@@ -115,7 +138,7 @@
         <!-- second row -->
         <div class = "box-row">
           <div class = "box-cell box1">
-            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 18px;">Velocity</h1>
+            <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center; font-size: 24px;">Velocity</h1>
             <div id = "wrap">
               <div id="left">
                 <p id="speed" style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;"></p>
@@ -126,7 +149,7 @@
             </div>
           </div>
           <div class = "box-cell box2">
-            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;">Acceleration</h1>
+            <h1 style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;">Acceleration</h1>
             <div id = "wrap">
               <div id="left">
                 <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;text-align:center; font-size: 50px;"></p>
@@ -137,8 +160,7 @@
             </div>
           </div>
           <div class = "box-cell box3" style="text-align:center">
-            <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 18px;"> Restart Button </h1>
-            <p style="color:white; font-family: 'Poppins', cursive;text-align:center; font-size: 15px; margin-bottom:-8px;">2 min restart</p> 
+            <h1  style="color:white; font-family: 'Poppins', sans-serif;text-align:center; font-size: 24px;"> Restart Button </h1>
             <a href="/restart" style= "text-align: center;"> <img src="{{url_for('static', filename='Restart Button.png')}}"/> </a>
             <!--"Restart Button.png" -->
           </div>
