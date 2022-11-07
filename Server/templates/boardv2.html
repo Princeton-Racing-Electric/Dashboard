@@ -107,12 +107,15 @@
         <div class = "box-row">
           <div class = "box-cell box1">
             <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 24px;">Temperature</h1>
-            <div class = "wrap">
+            <div id = "wrap">
               <div class = "left">
                 <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;"></p>
               </div>
               <div class = "right">
                 <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">&#176C</p>
+                <!--<img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">-->
+              </div>
+              <div > 
                 <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">
               </div>
             </div>
@@ -187,21 +190,31 @@
     </div>
 
     <script>
+      /*
       let x = 4;
-      let volt = parseFloat(document.getElementById('voltage').value);
       const event_battery = new Event("start_battery");
-
+      
       document.addEventListener('start_battery', changePicBattery);
 
       function changePicBattery(){
-        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_20.png')}}"
+        let num = Math.floor(volt/20) * 20 + 20;
+        if (num>100) num = 100;
+        if (num<20) num = 20;
+        
+        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_" + num.toString() + ".png')}}";
       }
 
-      if (volt > 5){
-        document.dispatchEvent(event_battery);
-      }
+      let volt = parseFloat(document.getElementById("voltage").value);
       document.dispatchEvent(event_battery);
-      
+      */
+
+      // testing
+      let num = 0;
+      setInterval(function (){
+        num = ((num)%100) + 20
+        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_" + num.toString() + ".png')}}";
+      }, 1000);
+
       // For top right toggle menu
       function toggleMenu(x) {
         x.classList.toggle("change");
