@@ -108,15 +108,15 @@
           <div class = "box-cell box1">
             <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 24px;">Temperature</h1>
             <div id = "boxes">
-              <div class = "left">
-                <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;float:left"></p>
+              <div>
+                <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;float:left">12</p>
               </div>
-              <div class = "right">
+              <div>
                 <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;float:left">&#176C</p>
                 <!--<img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">-->
               </div>
               <div > 
-                <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;float:right">
+                <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;float:right;padding:0">
               </div>
             </div>
           </div>
@@ -212,7 +212,17 @@
       let num = 0;
       setInterval(function (){
         num = (num%100) + 20;
-        document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_" + num.toString() + ".png')}}";
+        if (num <= 20) {
+          document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_20.png')}}";
+        }else if (num <= 40) {
+          document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_40.png')}}";
+        }else if (num <= 60) {
+          document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_60.png')}}";
+        }else if (num <= 80) {
+          document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_80.png')}}";
+        }else {
+          document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}";
+        }
       }, 1000);
 
       // For top right toggle menu
