@@ -209,16 +209,16 @@
       */
 
       // testing
-      let num = 0;
+      let volt = 100;
       setInterval(function (){
-        num = (num%100) + 20;
-        if (num <= 20) {
+        volt = parseFloat(document.getElementById("voltage").innerHTML);
+        if (volt <= 20) {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_20.png')}}";
-        }else if (num <= 40) {
+        }else if (volt <= 40) {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_40.png')}}";
-        }else if (num <= 60) {
+        }else if (volt <= 60) {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_60.png')}}";
-        }else if (num <= 80) {
+        }else if (volt <= 80) {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_80.png')}}";
         }else {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}";
