@@ -107,16 +107,16 @@
         <div class = "box-row">
           <div class = "box-cell box1">
             <h1 style="color:white; font-family: 'Poppins', sans-serif; text-align:center;  font-size: 24px;">Temperature</h1>
-            <div id = "wrap">
+            <div id = "boxes">
               <div class = "left">
-                <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;"></p>
+                <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;font-size: 54px;float:left"></p>
               </div>
               <div class = "right">
-                <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;">&#176C</p>
+                <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;float:left">&#176C</p>
                 <!--<img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">-->
               </div>
               <div > 
-                <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">
+                <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;float:right">
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@
       // testing
       let num = 0;
       setInterval(function (){
-        num = ((num)%100) + 20
+        num = (num%100) + 20;
         document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_" + num.toString() + ".png')}}";
       }, 1000);
 
