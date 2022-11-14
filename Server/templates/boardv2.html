@@ -131,8 +131,8 @@
                 <p style="color:white; font-family: 'Poppins', cursive; text-align:center;font-size: 17px;float:left">&#176C</p>
                 <!--<img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;">-->
               </div>
-              <div > 
-                <img id="temp_picture" src="{{url_for('static', filename='Green_Temp_Icon.png')}}" alt="temperature picture" style="width:21px;height:42px;float:right;padding:0">
+              <div>
+                <img id="temp_picture" src="{{url_for('static', filename='temp_normal.png')}}" style="width:42px;height:42px;float:right;padding:0">
               </div>
             </div>
           </div>
@@ -224,7 +224,7 @@
       document.dispatchEvent(event_battery);
       */
 
-      // testing
+      // battery indicator
       let volt = 100;
       setInterval(function (){
         volt = parseFloat(document.getElementById("voltage").innerHTML);
@@ -238,6 +238,17 @@
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_80.png')}}";
         }else {
           document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}";
+        }
+      }, 1000);
+
+      // temperature indicator
+      const temp_limit = 33.3;
+      setInterval(function (){
+        let temp = parseFloat(document.getElementById("temperature").innerHTML);
+        if (temp >= limit) {
+          document.getElementById("temp_picture").src = "{{url_for('static', filename='temp_high.png')}}"
+        }else {
+          document.getElementById("temp_picture").src = "{{url_for('static', filename='temp_normal.png')}}"
         }
       }, 1000);
 
