@@ -171,6 +171,7 @@ def update_time():
     global realTime
     while running:
         realTime = get_time()
+        print(realTime)
         time.sleep(DELAY_TIME)
 
 # Update test variable
