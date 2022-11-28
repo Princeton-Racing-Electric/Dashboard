@@ -54,6 +54,7 @@ accel = 0
 temperature = 0
 voltage = 0
 miles = 0
+realTime = ""
 # for threading
 counter = 0
 running = True
@@ -124,6 +125,9 @@ def get_volt() -> float:
 def get_miles() -> float:
     miles = HallEffect.number_interrupts * WHEEL_DIAMETER_IN * math.pi / 63360
     return miles
+
+def get_time() -> string:
+    return datetime.now().strftime("%H:%M:%S")
 ############################################
 
 
@@ -162,7 +166,12 @@ def update_miles():
     while running:
         miles = get_miles()
         time.sleep(DELAY_TIME)
-
+# Update time
+def update_time():
+    global realTime
+    while running:
+        realTime = get_time()
+        time.sleep(DELAY_TIME)
 
 # Update test variable
 def increment_var():
@@ -170,6 +179,7 @@ def increment_var():
     while running:
         counter = counter + 1
         time.sleep(DELAY_TIME)
+        
 
 ######################################################
 # function to play sound  -- need to set variables, find wav files, and temperature/battery limits
@@ -204,6 +214,7 @@ t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
+t7 = Thread(target=update_time)
 
 ##############################################################
 # To call playSound function continously 
@@ -235,7 +246,7 @@ def update():
             "temperature": temperature,
             "voltage": voltage,
             "mileage": miles,
-            "time": datetime.now().strftime("%H:%M:%S")
+            "time": realTime
         }
     )
 ########################################################################
@@ -282,6 +293,7 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
+    t7.start()
     app.run(debug=True)
     # app.run(host='127.0.0.1', port = 5000, debug=True)  
     #command = "chromium-browser https://127.0.0.1:5000"
