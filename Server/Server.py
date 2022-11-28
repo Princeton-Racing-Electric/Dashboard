@@ -126,7 +126,7 @@ def get_miles() -> float:
     miles = HallEffect.number_interrupts * WHEEL_DIAMETER_IN * math.pi / 63360
     return miles
 
-def get_time() -> string:
+def get_time():
     return datetime.now().strftime("%H:%M:%S")
 ############################################
 
