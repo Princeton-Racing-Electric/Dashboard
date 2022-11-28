@@ -54,27 +54,35 @@
             display:table-row;
         }
         .container .box .box-cell-side {
+            border: 2px solid white;
+            text-align: justify;
             display:table-cell;
             width: 25%;
             padding: 10px;
         }
         .container .box .box-cell-center {
+            border: 2px solid white;
+            text-align: justify;
             display:table-cell;
             width: 50%;
             padding: 10px;
         }
 
-        .container .box .box-cell-side.box1 {
-            border: 2px solid white;
-            text-align:justify;
+        .line-left, .line-right {
+            width: 200px;
+            height: 2px;
+            background-color: #fff;
+            margin: 6px 0;
         }
-        .container .box .box-cell-center.box2 {
-            border: 2px solid white;
-            text-align:justify
+        .line-left {
+            position: absolute;
+            left: 0px;
+            top: 389px;
         }
-        .container .box .box-cell-side.box3 {
-            border: 2px solid white;
-            text-align:justify;
+        .line-right {
+            position: absolute;
+            left: 600px;
+            top: 159px;
         }
 
         /*
@@ -110,35 +118,37 @@
             <div class="bar3"></div>
         </div>
     </div>
+    <!-- <div class="dividers">
+        <div class = "line-left"></div>
+        <div class = "line-right"></div>
+    </div> -->
     <div class = "box">
         <div class = "box-row">
-            <div class = "box-cell-side box1" onclick="toggleText()">
+            <div class = "box-cell-side">
                 <h1 id="temp-label" style="color:white; font-family: 'Poppins', sans-serif;
-                    text-align:center; font-size: 18px;">Motors</h1>
+                    text-align:center; font-size: 18px;">Temperature</h1>
                 <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 40px;">12</p>
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;">16:00</p>
             </div>
-            <div class = "box-cell-center box2">
-                <h1 style="color:white; font-family: 'Poppins', sans-serif;
-                    text-align:center; font-size: 24px;">Motors</h1>
+            <div class = "box-cell-center">
+                <p id="velocity" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px;
+                    position: absolute; left: 46.875%; top: 10%;">12</p>
+                <p id="acceleration" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px;
+                    position: absolute; left: 46.875%; top: 30%;">12</p> -->
+                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px; float: left; padding: 4%;">245m</p>
+                <p id="laps" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px; float: right; padding: 4%;">6 laps</p>
             </div>
             <div class = "box-cell-side">
                 <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;">77%</p>
                 <h1 style="color:white; font-family: 'Poppins', sans-serif;
                     text-align:center; font-size: 24px;">Efficiency</h1>
-            </div>
-        </div>
-        <div class = "box-row">
-            <div class = "box-cell-center box5">
-                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px; float: left; padding: 4%;">245m</p>
-                <p id="laps" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px; float: right; padding: 4%;">6 laps</p>
-            </div>
-            <div class = "box-cell-side box6">
                 <p id="battery" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;">96%</p>
             </div>
@@ -187,11 +197,13 @@
         x.classList.toggle("change");
     }
 
+    /*
     let tempMode = true;
     function toggleText() {
         if (tempMode) document.getElementById("temp-label").innerHTML = "Water Cooling";
         else document.getElementById("temp-label").innerHTML = "Motors";
         tempMode = !tempMode;
+    */
     }
 </script>
 </body>
