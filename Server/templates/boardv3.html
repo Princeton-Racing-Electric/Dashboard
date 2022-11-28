@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Car Dashboard</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles2.css')}}" />
+
+    <!-- style for putting divs in rows -->
+    <style>
+        /* menu on top right */
+        .menubar {
+            width: 100%;
+            height: 10%;
+        }
+        .menu{
+            float: right;
+            cursor: pointer;
+        }
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #fff;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        /* Rotate first bar */
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        /* Fade out the second bar */
+        .change .bar2 {opacity: 0;}
+
+        /* Rotate last bar */
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+        /* end menu on top right */
+
+
+        .container .box {
+            width: 100%;
+            height: 90%;
+            display: table;
+            border: 2px solid white;
+        }
+
+        .container .box .box-row {
+            display:table-row;
+        }
+        .container .box .box-cell-side {
+            display:table-cell;
+            width: 25%;
+            padding: 10px;
+        }
+        .container .box .box-cell-center {
+            display:table-cell;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .container .box .box-cell-side.box1 {
+            border: 2px solid white;
+            text-align:justify;
+        }
+        .container .box .box-cell-center.box2 {
+            border: 2px solid white;
+            text-align:justify
+        }
+        .container .box .box-cell-side.box3 {
+            border: 2px solid white;
+            text-align:justify;
+        }
+
+        /*
+        .wrap {
+            display: flex;
+            justify-content: center;
+        }
+        .left, .right {
+            padding: 2%;
+        }*/
+    </style>
+
+    <!-- Necessary script for running jQuery. Which we use for AJAX -->
+    <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+
+    <!-- Necessary script for fetching sensor data from python server -->
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+    <!-- font import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Racing+Sans+One&display=swap" rel="stylesheet">
+</head>
+
+<!-- html script start -->
+<!-- test to center align -->
+<body style = "background-color: #0B101F;">
+<div class = "container">
+    <div class="menubar">
+        <div class="menu" onclick="toggleMenu(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </div>
+    <div class = "box">
+        <div class = "box-row">
+            <div class = "box-cell-side box1" onclick="toggleText()">
+                <h1 id="temp-label" style="color:white; font-family: 'Poppins', sans-serif;
+                    text-align:center; font-size: 18px;">Motors</h1>
+                <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 40px;">12</p>
+                <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px;">16:00</p>
+            </div>
+            <div class = "box-cell-center box2">
+                <h1 style="color:white; font-family: 'Poppins', sans-serif;
+                    text-align:center; font-size: 24px;">Motors</h1>
+            </div>
+            <div class = "box-cell-side">
+                <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px;">77%</p>
+                <h1 style="color:white; font-family: 'Poppins', sans-serif;
+                    text-align:center; font-size: 24px;">Efficiency</h1>
+            </div>
+        </div>
+        <div class = "box-row">
+            <div class = "box-cell-center box5">
+                <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px; float: left; padding: 4%;">245m</p>
+                <p id="laps" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px; float: right; padding: 4%;">6 laps</p>
+            </div>
+            <div class = "box-cell-side box6">
+                <p id="battery" style="color:white; font-family: 'Racing Sans One', cursive;
+                    text-align:center; font-size: 54px;">96%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*
+    let x = 4;
+    const event_battery = new Event("start_battery");
+
+    document.addEventListener('start_battery', changePicBattery);
+
+    function changePicBattery(){
+      let num = Math.floor(volt/20) * 20 + 20;
+      if (num>100) num = 100;
+      if (num<20) num = 20;
+
+      document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_" + num.toString() + ".png')}}";
+    }
+
+    let volt = parseFloat(document.getElementById("voltage").value);
+    document.dispatchEvent(event_battery);
+    */
+
+    // testing
+    let volt = 100;
+    setInterval(function (){
+        volt = parseFloat(document.getElementById("voltage").innerHTML);
+        if (volt <= 20) {
+            document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_20.png')}}";
+        }else if (volt <= 40) {
+            document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_40.png')}}";
+        }else if (volt <= 60) {
+            document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_60.png')}}";
+        }else if (volt <= 80) {
+            document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_80.png')}}";
+        }else {
+            document.getElementById("battery_picture").src = "{{url_for('static', filename='battery_100.png')}}";
+        }
+    }, 1000);
+
+    // For top right toggle menu
+    function toggleMenu(x) {
+        x.classList.toggle("change");
+    }
+
+    let tempMode = true;
+    function toggleText() {
+        if (tempMode) document.getElementById("temp-label").innerHTML = "Water Cooling";
+        else document.getElementById("temp-label").innerHTML = "Motors";
+        tempMode = !tempMode;
+    }
+</script>
+</body>
+
+</html>
+
+
+<!-- manual center -->
+<!-- <div style="float: left; margin:0px;margin-left: 25%">
+        <p style="color:white; font-family: 'Racing Sans One', cursive; font-size: 50px;">2.54</p>
+      </div>
+      <div style="float: left; margin:0px; margin-top: 67px; margin-left:3px;">
+        <p style="color:white; font-family: 'Poppins', sans-serif; font-size: 15px;">mph</p>
+      </div>
+-->
