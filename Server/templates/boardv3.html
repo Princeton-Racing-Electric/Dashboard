@@ -44,8 +44,9 @@
 
 
         .container .box {
-            width: 100%;
-            height: 90%;
+            position: fixed;
+            width: 800px;
+            height: 480px;
             display: table;
             border: 2px solid white;
         }
@@ -54,6 +55,7 @@
             display:table-row;
         }
         .container .box .box-cell-side {
+            position: relative;
             border: 2px solid white;
             text-align: justify;
             display:table-cell;
@@ -61,6 +63,7 @@
             padding: 10px;
         }
         .container .box .box-cell-center {
+            position: relative;
             border: 2px solid white;
             text-align: justify;
             display:table-cell;
@@ -70,19 +73,19 @@
 
         .line-left, .line-right {
             width: 200px;
-            height: 2px;
+            height: 4px;
             background-color: #fff;
             margin: 6px 0;
         }
         .line-left {
             position: absolute;
-            left: 0px;
-            top: 389px;
+            left: 10px;
+            top: 388px;
         }
         .line-right {
             position: absolute;
-            left: 600px;
-            top: 159px;
+            left: 610px;
+            top: 158px;
         }
 
         /*
@@ -118,19 +121,28 @@
             <div class="bar3"></div>
         </div>
     </div>
-    <!-- <div class="dividers">
+    <div class="dividers">
         <div class = "line-left"></div>
         <div class = "line-right"></div>
-    </div> -->
+    </div>
     <div class = "box">
         <div class = "box-row">
             <div class = "box-cell-side">
                 <h1 id="temp-label" style="color:white; font-family: 'Poppins', sans-serif;
-                    text-align:center; font-size: 18px;">Temperature</h1>
+                    text-align:center; font-size: 18px;
+                    position: absolute; left: 20%; top: 4.167%;">Temperature</h1>
                 <p id="temperature" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 40px;">12</p>
+                    text-align:center; font-size: 40px;
+                    position: absolute; left: 27.5%; top: 4.416%;">20°C</p>
+                <img id="thermometer_picture" src="{{url_for('static', filename='thermometer.png')}}"
+                    alt="thermometer picture" style="width:83px; height: 247px;
+                    position: absolute; left: 29%; top: 24.167%;">
+                <!-- <img id="thermometer_pic" src="thermometer.png" alt="battery picture"
+                     style="width:83px; height: 247px;
+                     position: absolute; left: 29%; top: 24.167%;"> -->
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px;">16:00</p>
+                    text-align:center; font-size: 54px;
+                    position: absolute; left: 15.5%; top: 72.375%;">16:00</p>
             </div>
             <div class = "box-cell-center">
                 <p id="velocity" style="color:white; font-family: 'Racing Sans One', cursive;
@@ -140,20 +152,32 @@
                     text-align:center; font-size: 54px;
                     position: absolute; left: 46.875%; top: 30%;">12</p> -->
                 <p id="mileage" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px; float: left; padding: 4%;">245m</p>
+                    text-align:center; font-size: 54px; float: left; padding: 4%;
+                    position: absolute;">245m</p>
                 <p id="laps" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px; float: right; padding: 4%;">6 laps</p>
+                    text-align:center; font-size: 54px; float: right; padding: 4%;
+                    position: absolute;">6 laps</p>
             </div>
             <div class = "box-cell-side">
                 <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px;">77%</p>
+                    text-align:center; font-size: 54px;
+                    position: absolute;">77%</p>
                 <h1 style="color:white; font-family: 'Poppins', sans-serif;
-                    text-align:center; font-size: 24px;">Efficiency</h1>
+                    text-align:center; font-size: 24px;
+                    position: absolute;">Efficiency</h1>
+                <img id="battery_picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture"
+                     style="width:200px; height: 120px; rotate: 90deg;
+                     position: absolute;">
+                <!-- <img id="battery_pic" src="battery_100.png" alt="battery picture"
+                     style="width:200px; height: 120px; rotate: 90deg;
+                     position: absolute;"> -->
                 <p id="battery" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 54px;">96%</p>
+                    text-align:center; font-size: 54px;
+                    position: absolute;">96%</p>
             </div>
         </div>
     </div>
+    <!-- <img id="compare" src="Untitled.png" alt="battery picture" style="position: fixed; left: 850px;"> -->
 </div>
 
 <script>
