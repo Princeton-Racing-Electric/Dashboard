@@ -18,6 +18,7 @@ setInterval(function () {
       $("#acceleration").html(Math.round(100*response["acceleration"])/100);
       $("#voltage").html(Math.round(100*response["voltage"])/100);
       $("#mileage").html(Math.round(100*response["mileage"])/100);
+      $("#time").html(response["time"]);
     },
     error: function (error) {
       console.log(error);
