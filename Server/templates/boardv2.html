@@ -245,7 +245,7 @@
       const temp_limit = 33.3;
       setInterval(function (){
         let temp = parseFloat(document.getElementById("temperature").innerHTML);
-        if (temp >= limit) {
+        if (temp >= temp_limit) {
           document.getElementById("temp_picture").src = "{{url_for('static', filename='temp_high.png')}}"
         }else {
           document.getElementById("temp_picture").src = "{{url_for('static', filename='temp_normal.png')}}"
