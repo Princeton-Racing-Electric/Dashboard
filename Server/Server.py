@@ -127,7 +127,7 @@ def get_miles() -> float:
     return miles
 
 def get_time():
-    return datetime.now().strftime("%H:%M:%S")
+    return datetime.now().strftime("%H:%M")
 ############################################
 
 
