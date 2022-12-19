@@ -234,7 +234,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # Renders the index.html template (in the templates folder) - must match the html file 
-    return render_template("boardv2.html", counter=counter)
+    return render_template("boardv3.html", counter=counter)
 
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
