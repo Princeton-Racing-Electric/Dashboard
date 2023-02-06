@@ -234,7 +234,7 @@
                     width: 45%; height: 5%;
                     position: absolute; left: 28.75%; top: 22.567%">Efficiency</h1>
                 <img id="battery-picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture"
-                     style="width: 100%; height: 25%; rotate: 180deg;
+                     style="width: 100%; height: 25%; transform:rotate(270deg);
                      position: absolute; left: 0; top: 48%;">
                 <!-- <img id="battery-pic" src="battery_100.png" alt="battery picture"
                      style="width: 100%; height: 25%; rotate: 270deg;
@@ -317,7 +317,7 @@
             let temp = convertFahrenheitToCelsius(document.getElementById("temperature-number").innerHTML);
             document.getElementById("temperature-number").innerHTML = Math.round(temp) + "";
         }
-        metricTemp = !metricTemp;
+        metricTemp = !metricTemp
     }
 
     // testing
