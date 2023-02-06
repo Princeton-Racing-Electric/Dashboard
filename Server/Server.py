@@ -149,13 +149,13 @@ def update_miles():
     global miles
     while running:
         miles = get_miles()
+        print(miles)
         time.sleep(DELAY_TIME)
 # Update time
 def update_time():
     global realTime
     while running:
         realTime = get_time()
-        print(realTime)
         time.sleep(DELAY_TIME)
 
 # Update test variable
@@ -236,6 +236,7 @@ def update():
         }
     )
 
+# Print all variables for debugging
 def printVariables():
     print("Value:", counter)
     print("Velocity:", mph)
