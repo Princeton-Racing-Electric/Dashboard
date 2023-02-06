@@ -83,8 +83,8 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    if ser.in_waiting > 0:
-        line = ser.readline().decode('utf-8').rstrip()
+    #if ser.in_waiting > 0:
+    line = ser.readline().decode('utf-8').rstrip()
     return float(line)
 
 def get_accel() -> float:
