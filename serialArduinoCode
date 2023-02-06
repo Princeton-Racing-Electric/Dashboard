@@ -2,6 +2,7 @@ void setup() {
   Serial.begin(9600);
 }
 void loop() {
-  Serial.println("Hello from Arduino!");
+  randomNumber=random(100,500);
+  Serial.println(randomNumber);
   delay(1000);
 }
