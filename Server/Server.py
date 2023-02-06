@@ -31,12 +31,9 @@ from playsound import playsound
 import time, math
 import signal
 
-#import can
-
 import serial
 import sys
 import os
-import can
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
@@ -226,6 +223,7 @@ def index():
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
+    printVariables()
     return jsonify(
         {
             "value": counter,
@@ -237,6 +235,15 @@ def update():
             "time": realTime
         }
     )
+
+def printVariables():
+    print("Value:", counter)
+    print("Velocity:", mph)
+    print("Acceleration", accel)
+    print("Temperature:", temperature)
+    print("Voltage:", voltage)
+    print("Mileage:", miles)
+    print("Time", realTime)
 ########################################################################
 # Test code to ensure that button goes to app.route on click
 @app.route('/test')
