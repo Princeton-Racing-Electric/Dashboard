@@ -40,8 +40,18 @@
         .change .bar3 {
             transform: translate(0, -11px) rotate(45deg);
         }
-        /* end menu on top right */
 
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            right: 0;
+            z-index: 1;
+        }
+        .show {display:block;}
+        /* end menu on top right */
 
         .container .box {
             position: fixed;
@@ -208,6 +218,11 @@
                         <div class="bar1"></div>
                         <div class="bar2"></div>
                         <div class="bar3"></div>
+                        <a href="/restart" style= "text-align: center;">
+                            <div id = "dropdown" class="dropdown-content">
+                              <p style="color: black; font-family: 'Poppins', cursive; text-align: center; font-size: 17px; float:center"><img src="{{url_for('static', filename='Restart Button.png')}}" style="width:100px; height:100px"></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;
@@ -256,6 +271,7 @@
     // For top right toggle menu
     function toggleMenu(x) {
         x.classList.toggle("change");
+        document.getElementById("dropdown").classList.toggle("show");
     }
 
     // toggle distance units between imperial and metric

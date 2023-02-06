@@ -33,6 +33,7 @@ import signal
 
 #import can
 
+import serial
 import sys
 import os
 import can
@@ -69,9 +70,6 @@ def handle_keyboard_int(signal, stack_frame):
     running = False
     raise KeyboardInterrupt()
 
-def can_init():
-    os.system('sudo ip link set can0 type can bitrate 1000000')
-    os.system('sudo ifconfig can0 up')
 
 # Link handle_keyboard_int function to a SIGINT signal (ctrl-c)
 signal.signal(signal.SIGINT, handle_keyboard_int)
@@ -88,20 +86,9 @@ signal.signal(signal.SIGINT, handle_keyboard_int)
 # returns the current speed in miles per hour using the hall effect
 # sensor
 def get_speed() -> float:
-    #num_interrupts = HallEffect.number_interrupts
-    #prev_num_interrupts = HallEffect.previous_number_interrupts
-    #mph = 0
-
-    #if num_interrupts != prev_num_interrupts:
-    #    HallEffect.calculate_speed(WHEEL_DIAMETER_IN)
-    #    mph = HallEffect.mph
-    #msgS = can.Message(arbitration_id=0x600 + nodeID, data=[0x40, 0x6C, 0x60, 0x00, 0x00, 0x00, 0x00], is_extended_id=False)
-    #can0.send(msgS)
-    #msgR = can0.recv(30.0)
-    #print(msgR)
-    #mph = int(msgR.data[3], 16) + (2**8)*int(msgR.data[2], 16) + (2**16)*int(msgR.data[1], 16) + (2**24)*int(msgR.data[0], 16)
-    #print(mph)
-    return 0
+    if ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').rstrip()
+    return float(line)
 
 def get_accel() -> float:
     num_interrupts = HallEffect.number_interrupts
@@ -287,7 +274,8 @@ if __name__ == "__main__":
     HallEffect.init_GPIO()
     HallEffect.init_interrupt()
     Voltage.init()
-    #can_init()
+    ser = serial.Serial('/dev/ttyS0', 9600, timeout=1)
+    ser.reset_input_buffer()
     t1.start()
     t2.start()
     t3.start()
