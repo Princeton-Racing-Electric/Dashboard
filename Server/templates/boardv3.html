@@ -320,7 +320,7 @@
         metricTemp = !metricTemp
     }
 
-    // testing
+    // changing battery images
     let volt = 100;
     setInterval(function() {
         volt = document.getElementById("battery").innerHTML;
@@ -352,6 +352,30 @@
         if (hour < 10) hour = "0" + hour;
         if (minute < 10) minute = "0" + minute;
         document.getElementById("time").innerHTML = hour + ":" + minute;
+    }, 1000);
+
+    // changing temperature images currently in C 
+    // motor ranges b/w 100 - 200C  -- yellow at 100
+    let temp = 200;
+    setInterval(function() {
+        temp = document.getElementById("temperature").innerHTML;
+        temp = parseFloat(temp.substring(0, temp.length - 1));
+        if (temp <= 25) {
+            //document.getElementById("thermometer-picture").src = "";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_20.png')}}";
+        } else if (temp <= 50) {
+            //document.getElementById("thermometer-picture").src = "";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_40.png')}}";
+        } else if (temp <= 100) {
+            //document.getElementById("thermometer-picture").src = "";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_60.png')}}";
+        } else if (temp <= 150) {
+            //document.getElementById("battery-pic").src = "";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_80.png')}}";
+        } else {
+            //document.getElementById("thermometer-picture").src = "";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_100.png')}}";
+        }
     }, 1000);
 
 
