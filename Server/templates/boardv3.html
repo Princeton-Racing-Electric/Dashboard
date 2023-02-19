@@ -112,7 +112,8 @@
             position: fixed;
             left: 900px;
         }
-        */
+         */
+
     </style>
 
     <!-- Necessary script for running jQuery. Which we use for AJAX -->
@@ -178,15 +179,11 @@
                     position: absolute; left: 12.5%; top: 72.375%;">16:00</p>
             </div>
             <div class = "box-cell-center">
-                <!-- <img id="speedometer-picture" src="{{url_for('static', filename='speedometer.png')}}"
-                    alt="speedometer picture" style="scale: 50%; position: absolute; left: -39%; top: -26%;"> -->
-                <!-- <img id="speedometer-pic" src="speedometer.png" alt="speedometer picture"
-                     style="scale: 50%; position: absolute; left: -39%; top: -26%;"> -->
                 <p id="mph" class="clickable" onclick="toggleDistanceUnits()"
                     style="color:white; font-family: 'Racing Sans One', cursive;
                     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
                     width: 60%; height: 20.833%;
-                    text-align:center; position: absolute; left: 20%; top: 24.791%;">
+                    text-align:center; position: absolute; left: 20%; top: 50.833%;"> <!-- 24.791 -->
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
@@ -194,10 +191,20 @@
                     style="color:white; font-family: 'Racing Sans One', cursive;
                     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
                     width: 60%; height: 15%;
-                    text-align:center; position: absolute; left: 20%; top: 45.833%;">
+                    text-align:center; position: absolute; left: 20%; top: 28.833%;"> <!-- 45.833% -->
                     <span id="acceleration-number" style="font-size: 50px">1.2</span>
                     <span id="acceleration-unit" style="font-size: 20px">m/s<sup>2</sup></span>
                 </p>
+                <img id="speed-bar-picture" src="{{url_for('static', filename='speed.png')}}"
+                    alt="speedometer picture" style="scale: 40%; position: absolute; left: -73.5%; top: -42%;">
+                <img id="speedometer-picture" src="{{url_for('static', filename='needle.png')}}"
+                    alt="speedometer picture" style="scale: 50%; position: absolute; left: 33%; top: -29.25%;
+                    transform-origin: 50% 86.61%;">
+                <!-- <img id="speed-bar-pic" src="speed.png" alt="speedometer picture"
+                     style="scale: 40%; position: absolute; left: -73.5%; top: -42%;"> -->
+                <!-- <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
+                     style="scale: 50%; position: absolute; left: 33%; top: -29.25%;
+                     transform-origin: 50% 86.61%;"> -->
                 <p id="mileage-text" class="clickable" onclick="toggleDistanceUnits()"
                     style="color:white; text-align:center;
                     width: 50%; height: 12.5%;
@@ -220,7 +227,7 @@
                         <div class="bar3"></div>
                         <a href="/restart" style= "text-align: center;">
                             <div id = "dropdown" class="dropdown-content">
-                              <p style="color: black; font-family: 'Poppins', cursive; text-align: center; font-size: 17px; float:center"><img src="{{url_for('static', filename='Restart Button.png')}}" style="width:100px; height:100px"></p>
+                              <p style="color: black; font-family: 'Poppins', cursive; text-align: center; font-size: 17px;"><img src="{{url_for('static', filename='Restart Button.png')}}" style="width:100px; height:100px"></p>
                             </div>
                         </a>
                     </div>
@@ -268,11 +275,13 @@
         return (fahrenheit - 32) * 5 / 9.0;
     }
 
+
     // For top right toggle menu
     function toggleMenu(x) {
         x.classList.toggle("change");
         document.getElementById("dropdown").classList.toggle("show");
     }
+
 
     // toggle distance units between imperial and metric
     let metricDistance = true;
@@ -305,6 +314,7 @@
         metricDistance = !metricDistance;
     }
 
+
     // toggle temperature units between imperial and metric
     let metricTemp = true;
     function toggleTempUnits() {
@@ -319,6 +329,7 @@
         }
         metricTemp = !metricTemp
     }
+
 
     // changing battery images
     let volt = 100;
@@ -354,6 +365,18 @@
         document.getElementById("time").innerHTML = hour + ":" + minute;
     }, 1000);
 
+
+    // rotate speedometer image according to velocity
+    setInterval(function() {
+        let velocity = document.getElementById("velocity-number").innerHTML;
+        if (metricDistance) velocity = convertKmToMiles(velocity);
+        velocity = velocity * 240 / 100 - 120;      // sets the range of velocity from -120 deg to 120 deg
+
+        let picture = document.getElementById("speedometer-picture");
+        picture.style.transform = 'rotate(' + velocity + 'deg)';
+    }, 25);
+
+
     // changing temperature images currently in C 
     // motor ranges b/w 100 - 200C  -- yellow at 100
     let temp = 200;
@@ -379,7 +402,7 @@
     }, 1000);
 
 
-    /* testing
+    // testing
     function changeVelocity() {
         let velocityRounded = parseFloat(document.getElementById("velocity").value);
         document.getElementById("velocity-number").innerHTML = Math.round(velocityRounded) + "";
@@ -392,7 +415,7 @@
         let batteryRounded = parseFloat(document.getElementById("battery_").value);
         document.getElementById("battery").innerHTML = Math.round(batteryRounded) + "%";
     }
-     */
+
 </script>
 </body>
 
