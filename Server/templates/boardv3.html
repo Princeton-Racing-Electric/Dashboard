@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress SpellCheckingInspection -->
 <html lang="en">
 <head>
     <title>Car Dashboard</title>
@@ -112,7 +113,7 @@
             position: fixed;
             left: 900px;
         }
-         */
+        */
 
     </style>
 
@@ -167,12 +168,14 @@
                     <span id="temperature-number">20</span>
                     <span id="temperature-unit">°C</span>
                 </p>
-                <img id="thermometer-picture" src="{{url_for('static', filename='thermometer.png')}}"
-                    alt="thermometer picture" style="width: 41.5%; height: 51.4583%;
-                    position: absolute; left: 29%; top: 24.167%;">
-                <!-- <img id="thermometer-pic" src="thermometer.png" alt="thermometer picture"
-                     style="width: 41.5%; height: 51.4583%;
-                     position: absolute; left: 29%; top: 24.167%;"> -->
+                <img id="thermometer-picture" src="{{url_for('static', filename='temp_red.png')}}"
+                    alt="thermometer picture" style="width: 62%; height: 51.042%;
+                    position: absolute; left: 19%; top: 25.833%;">
+                        <!-- left: 29%; top: 24.167%; -->
+                        <!-- width: 41.5%; height: 51.4583%; -->
+                <!-- <img id="thermometer-pic" src="temp_red.png" alt="thermometer picture"
+                     style="width: 62%; height: 51.042%;
+                     position: absolute; left: 19%; top: 25.833%;"> -->
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
                     width: 75%; height: 13.542%;
@@ -183,7 +186,7 @@
                     style="color:white; font-family: 'Racing Sans One', cursive;
                     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
                     width: 60%; height: 20.833%;
-                    text-align:center; position: absolute; left: 20%; top: 50.833%;"> <!-- 24.791 -->
+                    text-align:center; position: absolute; left: 20%; top: 50.833%;"> <!-- top: 24.791% -->
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
@@ -191,7 +194,7 @@
                     style="color:white; font-family: 'Racing Sans One', cursive;
                     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
                     width: 60%; height: 15%;
-                    text-align:center; position: absolute; left: 20%; top: 28.833%;"> <!-- 45.833% -->
+                    text-align:center; position: absolute; left: 20%; top: 28.833%;"> <!-- top: 45.833% -->
                     <span id="acceleration-number" style="font-size: 50px">1.2</span>
                     <span id="acceleration-unit" style="font-size: 20px">m/s<sup>2</sup></span>
                 </p>
@@ -201,8 +204,8 @@
                     alt="speedometer picture" style="scale: 50%; position: absolute; left: 33%; top: -29.25%;
                     transform-origin: 50% 86.61%;">
                 <!-- <img id="speed-bar-pic" src="speed.png" alt="speedometer picture"
-                     style="scale: 40%; position: absolute; left: -73.5%; top: -42%;"> -->
-                <!-- <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
+                     style="scale: 40%; position: absolute; left: -73.5%; top: -42%;">
+                <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
                      style="scale: 50%; position: absolute; left: 33%; top: -29.25%;
                      transform-origin: 50% 86.61%;"> -->
                 <p id="mileage-text" class="clickable" onclick="toggleDistanceUnits()"
@@ -327,7 +330,7 @@
             let temp = convertFahrenheitToCelsius(document.getElementById("temperature-number").innerHTML);
             document.getElementById("temperature-number").innerHTML = Math.round(temp) + "";
         }
-        metricTemp = !metricTemp
+        metricTemp = !metricTemp;
     }
 
 
@@ -337,19 +340,19 @@
         volt = document.getElementById("battery").innerHTML;
         volt = parseFloat(volt.substring(0, volt.length - 1));
         if (volt <= 20) {
-            //document.getElementById("battery-pic").src = "battery_20.png";
+            // document.getElementById("battery-pic").src = "battery_20.png";
             document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_20.png')}}";
         } else if (volt <= 40) {
-            //document.getElementById("battery-pic").src = "battery_40.png";
+            // document.getElementById("battery-pic").src = "battery_40.png";
             document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_40.png')}}";
         } else if (volt <= 60) {
-            //document.getElementById("battery-pic").src = "battery_60.png";
+            // document.getElementById("battery-pic").src = "battery_60.png";
             document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_60.png')}}";
         } else if (volt <= 80) {
-            //document.getElementById("battery-pic").src = "battery_80.png";
+            // document.getElementById("battery-pic").src = "battery_80.png";
             document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_80.png')}}";
         } else {
-            //document.getElementById("battery-pic").src = "battery_100.png";
+            // document.getElementById("battery-pic").src = "battery_100.png";
             document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_100.png')}}";
         }
     }, 1000);
@@ -367,10 +370,11 @@
 
 
     // rotate speedometer image according to velocity
+    // min velocity is 0 mph (0 kph), max velocity is 100 mph (160 kph)
     setInterval(function() {
         let velocity = document.getElementById("velocity-number").innerHTML;
         if (metricDistance) velocity = convertKmToMiles(velocity);
-        velocity = velocity * 240 / 100 - 120;      // sets the range of velocity from -120 deg to 120 deg
+        velocity = velocity * 240 / 100 - 120;      // sets the range of rotation from -120 deg to 120 deg
 
         let picture = document.getElementById("speedometer-picture");
         picture.style.transform = 'rotate(' + velocity + 'deg)';
@@ -381,23 +385,23 @@
     // motor ranges b/w 100 - 200C  -- yellow at 100
     let temp = 200;
     setInterval(function() {
-        temp = document.getElementById("temperature").innerHTML;
-        temp = parseFloat(temp.substring(0, temp.length - 1));
+        temp = document.getElementById("temperature-number").innerHTML;
+        if (!metricTemp) temp = convertFahrenheitToCelsius(temp);
         if (temp <= 25) {
-            //document.getElementById("thermometer-picture").src = "";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_20.png')}}";
+            // document.getElementById("thermometer-pic").src = "temp_green.png";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_green.png')}}";
         } else if (temp <= 50) {
-            //document.getElementById("thermometer-picture").src = "";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_40.png')}}";
+            // document.getElementById("thermometer-pic").src = "temp_yellow.png";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_yellow.png')}}";
         } else if (temp <= 100) {
-            //document.getElementById("thermometer-picture").src = "";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_60.png')}}";
+            // document.getElementById("thermometer-pic").src = "temp_orange.png";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_orange.png')}}";
         } else if (temp <= 150) {
-            //document.getElementById("battery-pic").src = "";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_80.png')}}";
+            // document.getElementById("thermometer-pic").src = "temp_redorange.png";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_redorange.png')}}";
         } else {
-            //document.getElementById("thermometer-picture").src = "";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='battery_100.png')}}";
+            // document.getElementById("thermometer-pic").src = "temp_red.png";
+            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
         }
     }, 1000);
 
