@@ -19,7 +19,7 @@ setInterval(function () {
       $("#voltage").html(Math.round(100*response["voltage"])/100);
       $("#mileage").html(Math.round(100*response["mileage"])/100);
       $("#efficiency").html(Math.round(100*response["efficiency"])/100);
-      $("#time").html(response["time"]);
+      //$("#time").html(response["time"]);
     },
     error: function (error) {
       console.log(error);

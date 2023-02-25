@@ -233,7 +233,7 @@ def update():
             "temperature": temperature,
             "voltage": voltage,
             "mileage": miles,
-            "time": realTime
+            #"time": realTime
         }
     )
 
