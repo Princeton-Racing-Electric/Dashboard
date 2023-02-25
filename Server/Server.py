@@ -120,7 +120,8 @@ def get_time():
 def update_speed():
     global mph
     while running:
-        mph = get_speed()
+        #mph = get_speed()
+        mph = 5
         time.sleep(DELAY_TIME)
 
 def update_accel():
