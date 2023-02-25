@@ -13,7 +13,7 @@ setInterval(function () {
     type: "POST",
     success: function (response) {
       console.log(response);
-      $("#speed").html(Math.round(100*response["mph"])/100);
+      $("#mph").html(Math.round(100*response["mph"])/100);
       $("#temperature").html(Math.round(100*response["temperature"])/100);
       $("#acceleration").html(Math.round(100*response["acceleration"])/100);
       $("#voltage").html(Math.round(100*response["voltage"])/100);
