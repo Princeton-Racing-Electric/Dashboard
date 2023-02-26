@@ -190,14 +190,6 @@
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
-                <p id="acceleration-text" class="clickable" onclick="toggleDistanceUnits()"
-                    style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-                    width: 60%; height: 15%;
-                    text-align:center; position: absolute; left: 20%; top: 28.833%;"> <!-- top: 45.833% -->
-                    <span id="acceleration-number" style="font-size: 50px">1.2</span>
-                    <span id="acceleration-unit" style="font-size: 20px">m/s<sup>2</sup></span>
-                </p>
                 <img id="speed-bar-picture" src="{{url_for('static', filename='markers.png')}}"
                     alt="speedometer picture" style="width: 98%; height: 70.167%; position: absolute;
                     left: 1%; top: 12%;">
@@ -210,17 +202,18 @@
                      style="width: 16.875%; height: 46.667%;; position: absolute; left: 41.5625%; top: 12.5%;
                      transform-origin: 50% 86.61%;"> -->
                 <p id="mileage-text" class="clickable" onclick="toggleDistanceUnits()"
-                    style="color:white; text-align:center;
+                    style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;
                     width: 50%; height: 12.5%;
-                    position: absolute; left: 6.25%; top: 81%">
-                    <span id="mileage-number" style="font-family: 'Racing Sans One', cursive; font-size: 40px;">20.50</span>
-                    <span id="mileage-unit" style="font-family: 'Poppins', sans-serif; font-size: 20px">km</span>
+                    position: absolute; left: 2.5%; top: 81%">
+                    <span id="mileage-number" style="font-size: 40px;">20.50</span>
+                    <span id="mileage-unit" style="font-size: 20px">km</span>
                 </p>
-                <p id="laps-text" style="color:white; text-align:center;
-                    width: 25%; height: 12.5%;
-                    position: absolute; left: 62.5%; top: 81%;">
-                    <span id="laps-number" style="font-family: 'Racing Sans One', cursive; font-size: 40px;">6</span>
-                    <span id="laps-unit" style="font-family: 'Poppins', sans-serif; font-size: 20px">laps</span>
+                <p id="acceleration-text" class="clickable" onclick="toggleDistanceUnits()"
+                   style="color:white; font-family: 'Racing Sans One', cursive;
+                    width: 60%; height: 15%;
+                    text-align:center; position: absolute; left: 45%; top: 81%;"> <!-- left: 20%; top: 28.833%; -->
+                    <span id="acceleration-number" style="font-size: 40px">1.2</span>
+                    <span id="acceleration-unit" style="font-size: 20px">m/s<sup>2</sup></span>
                 </p>
             </div>
             <div class = "box-cell-side">
@@ -237,9 +230,9 @@
                     </div>
                 </div>
                 <p id="efficiency" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 45px;
+                    text-align:center; font-size: 40px;
                     width: 45%; height: 10%;
-                    position: absolute; left: 29%; top: 0.416%">73%</p>
+                    position: absolute; left: 29%; top: 3.416%">73%</p>
                 <h1 id="efficiency-text" style="color:white; font-family: 'Poppins', sans-serif;
                     text-align:center; font-size: 18px;
                     width: 45%; height: 5%;
@@ -251,9 +244,9 @@
                      style="width: 100%; height: 25%; rotate: 270deg;
                      position: absolute; left: 0; top: 48%;"> -->
                 <p id="battery" style="color:white; font-family: 'Racing Sans One', cursive;
-                    text-align:center; font-size: 60px;
+                    text-align:center; font-size: 54px;
                     width: 90%; height: 14.583%;
-                    position: absolute; left: 5%; top: 70%;">100%</p>
+                    position: absolute; left: 5%; top: 72.375%;">100%</p>
             </div>
         </div>
     </div>
