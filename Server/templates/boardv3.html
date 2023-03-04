@@ -176,9 +176,9 @@
                     <span id="temperature-number">20</span>
                     <span id="temperature-unit">°C</span>
                 </p>
-                <img id="thermometer-picture" src="{{url_for('static', filename='temp_red.png')}}"
+                <!-- <img id="thermometer-picture" src="{{url_for('static', filename='temp_red.png')}}"
                     alt="thermometer picture" style="width: 62%; height: 51.042%;
-                    position: absolute; left: 19%; top: 25.833%;">
+                    position: absolute; left: 19%; top: 25.833%;"> -->
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
                     width: 75%; height: 13.542%;
@@ -193,12 +193,12 @@
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
-                <img id="speed-bar-picture" src="{{url_for('static', filename='markers.png')}}"
+                <!-- <img id="speed-bar-picture" src="{{url_for('static', filename='markers.png')}}"
                     alt="speedometer picture" style="width: 98%; height: 70.167%; position: absolute;
                     left: 1%; top: 12%;">
                 <img id="speedometer-picture" src="{{url_for('static', filename='needle.png')}}"
                     alt="speedometer picture" style="width: 16.875%; height: 46.667%;
-                    position: absolute; left: 41.5625%; top: 12.5%; transform-origin: 50% 86.61%;">
+                    position: absolute; left: 41.5625%; top: 12.5%; transform-origin: 50% 86.61%;"> -->
                 <p id="mileage-text" class="clickable"
                     style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;
                     width: 50%; height: 12.5%;
@@ -362,7 +362,7 @@
 
     // rotate speedometer image according to velocity
     // min velocity is 0 mph (0 kph), max velocity is 100 mph (160 kph)
-    setInterval(function() {
+   /* setInterval(function() {
         if (document.getElementById("velocity-number") != null) {
             let velocity = document.getElementById("velocity-number").innerHTML;
             if (metricDistance) velocity = convertKmToMiles(velocity);
@@ -371,12 +371,12 @@
             let picture = document.getElementById("speedometer-picture");
             picture.style.transform = 'rotate(' + velocity + 'deg)';
         }
-    }, 25);
+    }, 25);*/
 
 
     // changing temperature images currently in C 
     // motor ranges b/w 100 - 200C  -- yellow at 100
-    let temp = 200;
+    /*let temp = 200;
     setInterval(function() {
         if (document.getElementById("temperature-number") != null) {
             temp = document.getElementById("temperature-number").innerHTML;
@@ -398,7 +398,7 @@
                 document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
             }
         }
-    }, 1000);
+    }, 1000);*/
 
 
     // testing
