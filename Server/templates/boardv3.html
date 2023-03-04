@@ -331,23 +331,25 @@
     // changing battery images
     let volt = 100;
     setInterval(function() {
-        volt = document.getElementById("battery").innerHTML;
-        volt = parseFloat(volt.substring(0, volt.length - 1));
-        if (volt <= 20) {
-            // document.getElementById("battery-pic").src = "battery_20.png";
-            document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_20.png')}}";
-        } else if (volt <= 40) {
-            // document.getElementById("battery-pic").src = "battery_40.png";
-            document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_40.png')}}";
-        } else if (volt <= 60) {
-            // document.getElementById("battery-pic").src = "battery_60.png";
-            document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_60.png')}}";
-        } else if (volt <= 80) {
-            // document.getElementById("battery-pic").src = "battery_80.png";
-            document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_80.png')}}";
-        } else {
-            // document.getElementById("battery-pic").src = "battery_100.png";
-            document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_100.png')}}";
+        if (document.getElementById("battery") != null) {
+            volt = document.getElementById("battery").innerHTML;
+            volt = parseFloat(volt.substring(0, volt.length - 1));
+            if (volt <= 20) {
+                // document.getElementById("battery-pic").src = "battery_20.png";
+                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_20.png')}}";
+            } else if (volt <= 40) {
+                // document.getElementById("battery-pic").src = "battery_40.png";
+                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_40.png')}}";
+            } else if (volt <= 60) {
+                // document.getElementById("battery-pic").src = "battery_60.png";
+                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_60.png')}}";
+            } else if (volt <= 80) {
+                // document.getElementById("battery-pic").src = "battery_80.png";
+                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_80.png')}}";
+            } else {
+                // document.getElementById("battery-pic").src = "battery_100.png";
+                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_100.png')}}";
+            }
         }
     }, 1000);
 
@@ -366,12 +368,14 @@
     // rotate speedometer image according to velocity
     // min velocity is 0 mph (0 kph), max velocity is 100 mph (160 kph)
     setInterval(function() {
-        let velocity = document.getElementById("velocity-number").innerHTML;
-        if (metricDistance) velocity = convertKmToMiles(velocity);
-        velocity = velocity * 240 / 100 - 120;      // sets the range of rotation from -120 deg to 120 deg
+        if (document.getElementById("velocity-number") != null) {
+            let velocity = document.getElementById("velocity-number").innerHTML;
+            if (metricDistance) velocity = convertKmToMiles(velocity);
+            velocity = velocity * 240 / 100 - 120;      // sets the range of rotation from -120 deg to 120 deg
 
-        let picture = document.getElementById("speedometer-picture");
-        picture.style.transform = 'rotate(' + velocity + 'deg)';
+            let picture = document.getElementById("speedometer-picture");
+            picture.style.transform = 'rotate(' + velocity + 'deg)';
+        }
     }, 25);
 
 
@@ -379,23 +383,25 @@
     // motor ranges b/w 100 - 200C  -- yellow at 100
     let temp = 200;
     setInterval(function() {
-        temp = document.getElementById("temperature-number").innerHTML;
-        if (!metricTemp) temp = convertFahrenheitToCelsius(temp);
-        if (temp <= 25) {
-            // document.getElementById("thermometer-pic").src = "temp_green.png";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_green.png')}}";
-        } else if (temp <= 50) {
-            // document.getElementById("thermometer-pic").src = "temp_yellow.png";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_yellow.png')}}";
-        } else if (temp <= 100) {
-            // document.getElementById("thermometer-pic").src = "temp_orange.png";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_orange.png')}}";
-        } else if (temp <= 150) {
-            // document.getElementById("thermometer-pic").src = "temp_redorange.png";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_redorange.png')}}";
-        } else {
-            // document.getElementById("thermometer-pic").src = "temp_red.png";
-            document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
+        if (document.getElementById("temperature-number") != null) {
+            temp = document.getElementById("temperature-number").innerHTML;
+            if (!metricTemp) temp = convertFahrenheitToCelsius(temp);
+            if (temp <= 25) {
+                // document.getElementById("thermometer-pic").src = "temp_green.png";
+                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_green.png')}}";
+            } else if (temp <= 50) {
+                // document.getElementById("thermometer-pic").src = "temp_yellow.png";
+                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_yellow.png')}}";
+            } else if (temp <= 100) {
+                // document.getElementById("thermometer-pic").src = "temp_orange.png";
+                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_orange.png')}}";
+            } else if (temp <= 150) {
+                // document.getElementById("thermometer-pic").src = "temp_redorange.png";
+                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_redorange.png')}}";
+            } else {
+                // document.getElementById("thermometer-pic").src = "temp_red.png";
+                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
+            }
         }
     }, 1000);
 
