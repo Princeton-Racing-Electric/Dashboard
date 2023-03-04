@@ -117,12 +117,12 @@ def get_time():
 
 # Data-updating functions for threads #######
 # Update speed
-def update_speed():
-    global mph
-    while running:
-        mph = get_speed()
+#def update_speed():
+#    global mph
+#    while running:
+#        mph = get_speed()
         #mph = 5
-        time.sleep(DELAY_TIME)
+#        time.sleep(DELAY_TIME)
 
 def update_accel():
     global accel
