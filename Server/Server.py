@@ -30,7 +30,6 @@ from threading import Thread, Timer
 from playsound import playsound
 import time, math
 import signal
-
 import serial
 import sys
 import os
