@@ -78,14 +78,6 @@
             width: 25%;
             padding: 10px;
         }
-        .container .box .box-cell-side2 {
-            position: relative;
-            border: 2px solid white;
-            text-align: justify;
-            display:table-cell;
-            width: 25%;
-            padding: 10px;
-        }
         .container .box .box-cell-center {
             position: relative;
             border: 2px solid white;
@@ -147,11 +139,9 @@
             <label for="velocity" style="color:white;">Velocity:</label><br>
             <input type="text" id="velocity">
             <input type="submit" value="Submit" onclick="changeVelocity(); return false;"><br>
-
             <label for="temp" style="color:white;">Temperature:</label><br>
             <input type="text" id="temp">
             <input type="submit" value="Submit" onclick="changeTemp(); return false;"><br>
-
             <label for="battery_" style="color:white;">Battery:</label><br>
             <input type="text" id="battery_">
             <input type="submit" value="Submit" onclick="changeBattery(); return false;"><br>
@@ -168,7 +158,7 @@
                     text-align:center; font-size: 18px;
                     width: 60%; height: 6.25%;
                     position: absolute; left: 20%; top: 4.167%;">Temperature</h1>
-                <p id="temperature" class="clickable" onclick="toggleTempUnits()"
+                <p id="mph" class="clickable" onclick="toggleTempUnits()"
                     style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 40px;
                     width: 75%; height: 10.417%;
@@ -179,17 +169,22 @@
                 <img id="thermometer-picture" src="{{url_for('static', filename='temp_red.png')}}"
                     alt="thermometer picture" style="width: 62%; height: 51.042%;
                     position: absolute; left: 19%; top: 25.833%;">
+                        <!-- left: 29%; top: 24.167%; -->
+                        <!-- width: 41.5%; height: 51.4583%; -->
+                <!-- <img id="thermometer-pic" src="temp_red.png" alt="thermometer picture"
+                     style="width: 62%; height: 51.042%;
+                     position: absolute; left: 19%; top: 25.833%;"> -->
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
                     width: 75%; height: 13.542%;
                     position: absolute; left: 12.5%; top: 72.375%;">16:00</p>
             </div>
             <div class = "box-cell-center">
-                <p id="mph" class="clickable"
-                    style="color:white; font-family: 'Racing Sans One', cursive; font-size: 96px;
+                <p id="mph" class="clickable" onclick="toggleDistanceUnits()"
+                    style="color:white; font-family: 'Racing Sans One', cursive;
                     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
                     width: 60%; height: 20.833%;
-                    text-align:center; position: absolute; left: 20%; top: 50.833%;">
+                    text-align:center; position: absolute; left: 20%; top: 50.833%;"> <!-- top: 24.791% -->
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
@@ -199,14 +194,19 @@
                 <img id="speedometer-picture" src="{{url_for('static', filename='needle.png')}}"
                     alt="speedometer picture" style="width: 16.875%; height: 46.667%;
                     position: absolute; left: 41.5625%; top: 12.5%; transform-origin: 50% 86.61%;">
-                <p id="mileage-text" class="clickable"
+                <!-- <img id="speed-bar-pic" src="markers.png" alt="speedometer picture"
+                     style="width: 98%; height: 70.167%; position: absolute; left: 1%; top: 12%;">
+                <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
+                     style="width: 16.875%; height: 46.667%;; position: absolute; left: 41.5625%; top: 12.5%;
+                     transform-origin: 50% 86.61%;"> -->
+                <p id="mileage-text" class="clickable" onclick="toggleDistanceUnits()"
                     style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;
                     width: 50%; height: 12.5%;
                     position: absolute; left: 2.5%; top: 81%">
                     <span id="mileage-number" style="font-size: 40px;">20.50</span>
                     <span id="mileage-unit" style="font-size: 20px">km</span>
                 </p>
-                <p id="acceleration-text" class="clickable"
+                <p id="acceleration-text" class="clickable" onclick="toggleDistanceUnits()"
                    style="color:white; font-family: 'Racing Sans One', cursive;
                     width: 60%; height: 15%;
                     text-align:center; position: absolute; left: 45%; top: 81%;"> <!-- left: 20%; top: 28.833%; -->
@@ -214,7 +214,7 @@
                     <span id="acceleration-unit" style="font-size: 20px">m/s<sup>2</sup></span>
                 </p>
             </div>
-            <div class = "box-cell-side2">
+            <div class = "box-cell-side">
                 <div class="menubar">
                     <div class="menu" onclick="toggleMenu(this)">
                         <div class="bar1"></div>
@@ -238,7 +238,10 @@
                 <img id="battery-picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture"
                      style="width: 100%; height: 25%; transform:rotate(270deg);
                      position: absolute; left: 0; top: 48%;">
-                <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive;
+                <!-- <img id="battery-pic" src="battery_100.png" alt="battery picture"
+                     style="width: 100%; height: 25%; rotate: 270deg;
+                     position: absolute; left: 0; top: 48%;"> -->
+                <p id="battery" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
                     width: 90%; height: 14.583%;
                     position: absolute; left: 5%; top: 72.375%;">100%</p>
@@ -276,7 +279,7 @@
 
 
     // toggle distance units between imperial and metric
-    /*let metricDistance = true;
+    let metricDistance = true;
     function toggleDistanceUnits() {
         if (metricDistance) { // switch to imperial units
             document.getElementById("velocity-unit").innerHTML = "mph";
@@ -304,7 +307,7 @@
             document.getElementById("mileage-number").innerHTML = mileage.toFixed(2);
         }
         metricDistance = !metricDistance;
-    }*/
+    }
 
 
     // toggle temperature units between imperial and metric
@@ -362,7 +365,7 @@
 
     // rotate speedometer image according to velocity
     // min velocity is 0 mph (0 kph), max velocity is 100 mph (160 kph)
-   /* setInterval(function() {
+    setInterval(function() {
         if (document.getElementById("velocity-number") != null) {
             let velocity = document.getElementById("velocity-number").innerHTML;
             if (metricDistance) velocity = convertKmToMiles(velocity);
@@ -371,12 +374,12 @@
             let picture = document.getElementById("speedometer-picture");
             picture.style.transform = 'rotate(' + velocity + 'deg)';
         }
-    }, 25);*/
+    }, 25);
 
 
     // changing temperature images currently in C 
     // motor ranges b/w 100 - 200C  -- yellow at 100
-    /*let temp = 200;
+    let temp = 200;
     setInterval(function() {
         if (document.getElementById("temperature-number") != null) {
             temp = document.getElementById("temperature-number").innerHTML;
@@ -398,7 +401,7 @@
                 document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
             }
         }
-    }, 1000);*/
+    }, 1000);
 
 
     // testing
@@ -419,20 +422,3 @@
 </body>
 
 </html>
-
-
-<!-- left: 29%; top: 24.167%; -->
-<!-- width: 41.5%; height: 51.4583%; -->
-<!-- <img id="thermometer-pic" src="temp_red.png" alt="thermometer picture"
-     style="width: 62%; height: 51.042%;
-     position: absolute; left: 19%; top: 25.833%;"> -->
-
-<!-- <img id="speed-bar-pic" src="markers.png" alt="speedometer picture"
-                     style="width: 98%; height: 70.167%; position: absolute; left: 1%; top: 12%;">
-                <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
-                     style="width: 16.875%; height: 46.667%;; position: absolute; left: 41.5625%; top: 12.5%;
-                     transform-origin: 50% 86.61%;"> -->
-
-<!-- <img id="battery-pic" src="battery_100.png" alt="battery picture"
-                     style="width: 100%; height: 25%; rotate: 270deg;
-                     position: absolute; left: 0; top: 48%;"> -->
