@@ -13,11 +13,11 @@ setInterval(function () {
     type: "POST",
     success: function (response) {
       console.log(response);
-      $("#velocity-number").html(Math.round(100*response["mph"])/100); // velocity-number
-      $("#temperature-number").html(Math.round(100*response["temperature"])/100);
-      $("#acceleration-number").html(Math.round(100*response["acceleration"])/100);
+      $("#mph").html(Math.round(100*response["mph"])/100); // velocity-number
+      $("#temperature").html(Math.round(100*response["temperature"])/100);
+      $("#acceleration").html(Math.round(100*response["acceleration"])/100);
       $("#voltage").html(Math.round(100*response["voltage"])/100);
-      $("#mileage-number").html(Math.round(100*response["mileage"])/100);
+      $("#mileage").html(Math.round(100*response["mileage"])/100);
       $("#efficiency").html(Math.round(100*response["efficiency"])/100);
       //$("#time").html(response["time"]);
     },
