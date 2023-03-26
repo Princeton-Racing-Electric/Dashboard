@@ -108,13 +108,13 @@
             cursor: pointer;
         }
 
+
         /*
         .testing {
             position: fixed;
             left: 900px;
         }
-        */
-
+         */
     </style>
 
     <!-- Necessary script for running jQuery. Which we use for AJAX -->
@@ -152,9 +152,9 @@
                     <span id="temperature-number">20</span>
                     <span id="temperature-unit">°C</span>
                 </p>
-                <img id="thermometer-picture" src="{{url_for('static', filename='temp_red.png')}}"
-                    alt="thermometer picture" style="width: 62%; height: 51.042%;
-                    position: absolute; left: 19%; top: 25.833%;">
+                <img id="thermometer-pic" src="temp_red.png" alt="thermometer picture"
+                     style="width: 62%; height: 51.042%;
+                     position: absolute; left: 19%; top: 25.833%;">
                 <p id="time" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
                     width: 75%; height: 13.542%;
@@ -169,12 +169,11 @@
                     <span id="velocity-number" style="font-size: 96px">62</span>
                     <span id="velocity-unit" style="font-size: 20px">kmh</span>
                 </p>
-                <img id="speed-bar-picture" src="{{url_for('static', filename='markers.png')}}"
-                    alt="speedometer picture" style="width: 98%; height: 70.167%; position: absolute;
-                    left: 1%; top: 12%;">
-                <img id="speedometer-picture" src="{{url_for('static', filename='needle.png')}}"
-                    alt="speedometer picture" style="width: 16.875%; height: 46.667%;
-                    position: absolute; left: 41.5625%; top: 12.5%; transform-origin: 50% 86.61%;">
+                <img id="speed-bar-pic" src="markers.png" alt="speedometer picture"
+                     style="width: 98%; height: 70.167%; position: absolute; left: 1%; top: 12%;">
+                <img id="speedometer-pic" src="needle.png" alt="speedometer picture"
+                     style="width: 16.875%; height: 46.667%;; position: absolute; left: 41.5625%; top: 12.5%;
+                     transform-origin: 50% 86.61%;">
                 <p id="mileage" class="clickable" onclick="toggleDistanceUnits()"
                     style="color:white; font-family: 'Racing Sans One', cursive; text-align:center;
                     font-size: 40px; width: 50%; height: 12.5%;
@@ -211,8 +210,8 @@
                     text-align:center; font-size: 18px;
                     width: 45%; height: 5%;
                     position: absolute; left: 28.75%; top: 22.567%">Efficiency</h1>
-                <img id="battery-picture" src="{{url_for('static', filename='battery_100.png')}}" alt="battery picture"
-                     style="width: 100%; height: 25%; transform:rotate(270deg);
+                <img id="battery-pic" src="battery_100.png" alt="battery picture"
+                     style="width: 100%; height: 25%; rotate: 270deg;
                      position: absolute; left: 0; top: 48%;">
                 <p id="voltage" style="color:white; font-family: 'Racing Sans One', cursive;
                     text-align:center; font-size: 54px;
@@ -306,23 +305,18 @@
             volt = document.getElementById("voltage").innerHTML;
             volt = parseFloat(volt.substring(0, volt.length - 1));
             if (volt <= 20) {
-                // document.getElementById("battery-pic").src = "battery_20.png";
-                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_20.png')}}";
+                document.getElementById("battery-pic").src = "battery_20.png";
             } else if (volt <= 40) {
-                // document.getElementById("battery-pic").src = "battery_40.png";
-                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_40.png')}}";
+                document.getElementById("battery-pic").src = "battery_40.png";
             } else if (volt <= 60) {
-                // document.getElementById("battery-pic").src = "battery_60.png";
-                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_60.png')}}";
+                document.getElementById("battery-pic").src = "battery_60.png";
             } else if (volt <= 80) {
-                // document.getElementById("battery-pic").src = "battery_80.png";
-                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_80.png')}}";
+                document.getElementById("battery-pic").src = "battery_80.png";
             } else {
-                // document.getElementById("battery-pic").src = "battery_100.png";
-                document.getElementById("battery-picture").src = "{{url_for('static', filename='battery_100.png')}}";
+                document.getElementById("battery-pic").src = "battery_100.png";
             }
         }
-    }, 1000);
+    }, 100);
 
 
     // set time
@@ -333,19 +327,31 @@
         if (hour < 10) hour = "0" + hour;
         if (minute < 10) minute = "0" + minute;
         document.getElementById("time").innerHTML = hour + ":" + minute;
-    }, 1000);
+    }, 2000);
 
 
+    // @todo this is different from boardv3.html
     // rotate speedometer image according to velocity
     // min velocity is 0 mph (0 kph), max velocity is 100 mph (160 kph)
+    let currentVelocity = 0;
     setInterval(function() {
         if (document.getElementById("velocity-number") != null) {
             let velocity = document.getElementById("velocity-number").innerHTML;
             if (metricDistance) velocity = convertKmToMiles(velocity);
             velocity = velocity * 240 / 100 - 120;      // sets the range of rotation from -120 deg to 120 deg
 
-            let picture = document.getElementById("speedometer-picture");
-            picture.style.transform = 'rotate(' + velocity + 'deg)';
+            let picture = document.getElementById("speedometer-pic");
+
+            let incrementer = 10;
+            if (velocity - currentVelocity < 0) incrementer *= -1;
+
+            if (Math.abs(currentVelocity - velocity) > Math.abs(incrementer)) {
+                picture.style.transform = 'rotate(' + (currentVelocity + incrementer) + 'deg)';
+                currentVelocity += incrementer;
+            } else {
+                picture.style.transform = 'rotate(' + velocity + 'deg)';
+                currentVelocity = velocity;
+            }
         }
     }, 25);
 
@@ -358,36 +364,59 @@
             temp = document.getElementById("temperature-number").innerHTML;
             if (!metricTemp) temp = convertFahrenheitToCelsius(temp);
             if (temp <= 25) {
-                // document.getElementById("thermometer-pic").src = "temp_green.png";
-                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_green.png')}}";
+                document.getElementById("thermometer-pic").src = "temp_green.png";
             } else if (temp <= 50) {
-                // document.getElementById("thermometer-pic").src = "temp_yellow.png";
-                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_yellow.png')}}";
+                document.getElementById("thermometer-pic").src = "temp_yellow.png";
             } else if (temp <= 100) {
-                // document.getElementById("thermometer-pic").src = "temp_orange.png";
-                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_orange.png')}}";
+                document.getElementById("thermometer-pic").src = "temp_orange.png";
             } else if (temp <= 150) {
-                // document.getElementById("thermometer-pic").src = "temp_redorange.png";
-                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_redorange.png')}}";
+                document.getElementById("thermometer-pic").src = "temp_redorange.png";
             } else {
-                // document.getElementById("thermometer-pic").src = "temp_red.png";
-                document.getElementById("thermometer-picture").src = "{{url_for('static', filename='temp_red.png')}}";
+                document.getElementById("thermometer-pic").src = "temp_red.png";
             }
         }
+    }, 100);
+
+
+    // @todo everything after this point isn't updated in boardv3.html
+    // testing logging
+    let iteration = 1;
+    setInterval(function() {
+        changeVelocity();
+        changeTemp();
+        changeBattery();
+
+        const speed = document.getElementById("velocity-number").innerHTML;
+        const accel = document.getElementById("acceleration-number").innerHTML;
+        const temp = document.getElementById("temperature-number").innerHTML;
+        const voltage = document.getElementById("voltage").innerHTML;
+        const mileage = document.getElementById("mileage-number").innerHTML;
+
+        console.log("iteration: " + iteration +
+            "\nspeed: " + speed +
+            "\naccel: " + accel +
+            "\ntemp: " + temp +
+            "\nvoltage: " + voltage +
+            "\nmileage: " + mileage);
+
+        iteration++;
     }, 1000);
 
 
     // testing
     function changeVelocity() {
-        let velocityRounded = parseFloat(document.getElementById("velocity").value);
+        // let velocityRounded = parseFloat(document.getElementById("velocity").value);
+        let velocityRounded = Math.round((Math.random() * 160));
         document.getElementById("velocity-number").innerHTML = Math.round(velocityRounded) + "";
     }
     function changeTemp() {
-        let tempRounded = parseFloat(document.getElementById("temp").value);
+        // let tempRounded = parseFloat(document.getElementById("temp").value);
+        let tempRounded = Math.round((Math.random() * 200));
         document.getElementById("temperature-number").innerHTML = Math.round(tempRounded) + "";
     }
     function changeBattery() {
-        let batteryRounded = parseFloat(document.getElementById("battery_").value);
+        // let batteryRounded = parseFloat(document.getElementById("battery_").value);
+        let batteryRounded = Math.round((Math.random() * 100));
         document.getElementById("voltage").innerHTML = Math.round(batteryRounded) + "%";
     }
 
