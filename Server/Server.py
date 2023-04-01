@@ -1,34 +1,12 @@
 # Server.py
 
-"""
-Run this application by:
-    Make sure you cd into this directory: ExampleServer/
-    1) Creating a venv (virtual environment)
-        - I like to use venv's to manage packages for a python project
-        - to create a venv, run:
-            python -m venv venv
-        - this will create a new venv in the directory "./venv"
-    2) activating the venv (virtual environment, which contains the
-       packages needed)
-        - $ . venv/bin/activate
-        - When you do this, you should see (venv) at the start of your
-        command line
-    3) Install the needed packages to the venv
-        - $ pip install -r requirements.txt
-    4) Run the python script
-        - $ python ExampleServer.py
-"""
-
-# I think there's a way to configure virtual environments with pycharm
-# so you can just hit the green arrow to run, so if people don't want
-# to use the command line we can figure that out too
-
 from datetime import datetime
 from doctest import Example
 from flask import Flask, render_template, jsonify
 from threading import Thread, Timer
 from playsound import playsound
 import time, math
+from time import gmtime, strftim
 import signal
 import serial
 import sys
@@ -51,13 +29,10 @@ accel = 0
 temperature = 0
 voltage = 0
 miles = 0
-realTime = ""
 # for threading
 counter = 0
 running = True
 
-# for can
-#can0 = can.interface.Bus(channel='can0', bustype='socketcan') #might need to change to pcan
 
 # Just for ease of testing, so only one interrupt is needed to stop the
 # server and thread
@@ -70,17 +45,13 @@ def handle_keyboard_int(signal, stack_frame):
 # Link handle_keyboard_int function to a SIGINT signal (ctrl-c)
 signal.signal(signal.SIGINT, handle_keyboard_int)
 
-#import webbrowser, os, sys
-#url = "http://127.0.0.1:5000/"
-#chrome_path = '/usr/lib/chromium-browser/chromium-browser'
-#webbrowser.get(chrome_path).open(url)
-
 # MAYBE: we could make a sensors class that encapsulates all the needed
 # code for the sensors, then we can just create an instance of that here
 # it could have get_speed and get_temp...
 # Data-fetching functions for sensors #######
 # returns the current speed in miles per hour using the hall effect
 # sensor
+
 def get_speed() -> float:
     #if ser.in_waiting > 0:
     line = ser.readline().decode('utf-8').rstrip()
@@ -109,8 +80,6 @@ def get_miles() -> float:
     miles = HallEffect.number_interrupts * WHEEL_DIAMETER_IN * math.pi / 63360
     return miles
 
-def get_time():
-    return datetime.now().strftime("%H:%M")
 ############################################
 
 
@@ -151,14 +120,8 @@ def update_miles():
         miles = get_miles()
         print(miles)
         time.sleep(DELAY_TIME)
-# Update time
-def update_time():
-    global realTime
-    while running:
-        realTime = get_time()
-        time.sleep(DELAY_TIME)
 
-# Update test variable
+# Update count variable
 def increment_var():
     global counter
     while running:
@@ -193,26 +156,20 @@ def playSoundTemp():
 
 running = True
 t1 = Thread(target=increment_var)
-# could maybe combine the sensors into just one thread?
 t2 = Thread(target=update_speed)
 t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
-t7 = Thread(target=update_time)
 
-##############################################################
-# To call playSound function continously 
-#schedule.every(1).minutes.do(playSoundVolt)
-#playSoundVolt()
-#playSoundTemp()
+
 
 ##############################################################
 
-# FLASK SERVER #########################################################
+# FLASK SERVER
 # Creates a flask app (which is just an instance of the Flask class)
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 # Create a basic route for the flask server
 @app.route("/")
@@ -223,7 +180,10 @@ def index():
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
-    printVariables()
+    if(counter % 10 == 0){
+        printVariables()
+        printVariablesToFile()
+    }
     return jsonify(
         {
             "value": counter,
@@ -232,7 +192,6 @@ def update():
             "temperature": temperature,
             "voltage": voltage,
             "mileage": miles,
-            #"time": realTime
         }
     )
 
@@ -244,13 +203,15 @@ def printVariables():
     print("Temperature:", temperature)
     print("Voltage:", voltage)
     print("Mileage:", miles)
-    print("Time", realTime)
-########################################################################
-# Test code to ensure that button goes to app.route on click
-@app.route('/test')
-def test():
-    print ('I got clicked\n')
-    return 'Clicked'
+    
+# Print all variables to file for logging
+def printVariablesToFile():
+    fileOut.write("Value: %d\n", counter)
+    fileOut.write("Velocity: %d\n", mph)
+    fileOut.write("Acceleration: %d\n", accel)
+    fileOut.write("Temperature: %d\n", temperature)
+    fileOut.write("Voltage: %d\n", voltage)
+    fileOut.write("Mileage: %d\n", miles)
 
 ########################################################################
 
@@ -258,9 +219,11 @@ def test():
 # runs the bash script sudo shutdown -r now
 @app.route("/restart")
 def restart():
+    fileOut.close()
     os.system("sudo reboot")
 
 def restart2():
+    fileOut.close()
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
@@ -270,13 +233,7 @@ def restart2():
 
 ########################################################################
 
-# Can also run the application with the following command line commands
-# $ export FLASK_APP=SimpleServer
-# $ python -m flask run
-
-# For continuously updating the page
-# https://stackoverflow.com/questions/59780007/ajax-with-flask-for-real-time-esque-updates-of-sensor-data-on-webpage
-
+# Run the application:
 
 if __name__ == "__main__":
     HallEffect.init_GPIO()
@@ -290,12 +247,10 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
-    t7.start()
+    
+    actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
+
+    global fileOut = open("DashboardLog - " + str(actual_time) + ".txt", "w")
+    
     app.run(debug=True)
-    # app.run(host='127.0.0.1', port = 5000, debug=True)  
-    #command = "chromium-browser https://127.0.0.1:5000"
-    #import subprocess
-    #process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-    #output = process.communicate()[0]
-    #print(output)
 
