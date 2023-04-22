@@ -1,5 +1,10 @@
 // Copyright (c) Sandeep Mistry. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Codes for CAN
+// 606C - velocity actual value
+// 6069 - velocity sensor actual value
+
+
 
 #include <CAN.h>
 #define BUTTON_PIN 33
@@ -32,7 +37,7 @@ void loop() {
   long currentTime = millis();
   currentState = digitalRead(BUTTON_PIN);
   char serialData = Serial.read();
-  readData(1,0x60F6,0x01);
+  readData(1,0x606C,0x00);
   recieveData();
   
   // this went before receiveData();
@@ -70,7 +75,7 @@ void loop() {
 void readData(int id, unsigned int address, unsigned int sub_index){
   byte b1 = (address >> 8);
   byte b2 = (address >> 0);
-  CAN.beginPacket(0x600+id);
+  CAN.beginPacket(0x600+id); // id is the motor you are recieving data from
   CAN.write(0x40);
   // info address little endian
   CAN.write(b2);
@@ -124,7 +129,9 @@ void recieveData() {
 
     if (!CAN.packetRtr()) {
       while (CAN.available()) {
-        Serial.print(CAN.read(),HEX);
+        message = CAN.read();
+        // Serial.print(message.length);
+        Serial.println(message.data);
       }
       // Serial.print(" and requested length ");
       
