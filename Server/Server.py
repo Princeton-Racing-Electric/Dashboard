@@ -180,10 +180,9 @@ def index():
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
-    if(int(10*time.time()) % 10 == 0){
+    if(int(10*time.time()) % 10 == 0):
         printVariables()
         printVariablesToFile()
-    }
     return jsonify(
         {
             "value": counter,
