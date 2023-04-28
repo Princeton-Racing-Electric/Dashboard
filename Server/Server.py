@@ -32,7 +32,7 @@ miles = 0
 # for threading
 counter = 0
 running = True
-fileOut = ""
+fileName = ""
 
 
 # Just for ease of testing, so only one interrupt is needed to stop the
@@ -207,12 +207,14 @@ def printVariables():
     
 # Print all variables to file for logging
 def printVariablesToFile():
-    fileOut.write("Value: %d\n", counter)
-    fileOut.write("Velocity: %d\n", mph)
-    fileOut.write("Acceleration: %d\n", accel)
-    fileOut.write("Temperature: %d\n", temperature)
-    fileOut.write("Voltage: %d\n", voltage)
-    fileOut.write("Mileage: %d\n", miles)
+    fileOut2 = open(fileName, "a")
+    fileOut2.write("Value: %d\n", counter)
+    #fileOut2.write("Velocity: %d\n", mph)
+    #fileOut2.write("Acceleration: %d\n", accel)
+    #fileOut2.write("Temperature: %d\n", temperature)
+    #fileOut2.write("Voltage: %d\n", voltage)
+    #fileOut2.write("Mileage: %d\n", miles)
+    fileOut2.close()
 
 ########################################################################
 
@@ -220,11 +222,11 @@ def printVariablesToFile():
 # runs the bash script sudo shutdown -r now
 @app.route("/restart")
 def restart():
-    fileOut.close()
+    #fileOut.close()
     os.system("sudo reboot")
 
 def restart2():
-    fileOut.close()
+    #fileOut.close()
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
@@ -250,7 +252,10 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    fileOut = open("../Logs/DashboardLog - " + str(actual_time) + ".txt", "w")
+    fileName = "DashboardLog - " + str(actual_time) + ".txt"
+    fileOut = open(fileName, "w")
+    fileOut.write("Dashboard Logs: \n")
+    fileOut.close()
     
     app.run(debug=True)
 
