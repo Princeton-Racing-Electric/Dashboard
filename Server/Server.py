@@ -129,6 +129,17 @@ def increment_var():
     while running:
         counter = counter + 1
         time.sleep(DELAY_TIME)
+
+# Print all variables to file for logging
+def printVariablesToFile():
+    fileOut2 = open(fileName, "a")
+    fileOut2.write("Value: %d\n", counter)
+    #fileOut2.write("Velocity: %d\n", mph)
+    #fileOut2.write("Acceleration: %d\n", accel)
+    #fileOut2.write("Temperature: %d\n", temperature)
+    #fileOut2.write("Voltage: %d\n", voltage)
+    #fileOut2.write("Mileage: %d\n", miles)
+    fileOut2.close()
         
 
 ######################################################
@@ -163,6 +174,7 @@ t3 = Thread(target=update_temp)
 t4 = Thread(target=update_volt)
 t5 = Thread(target=update_miles)
 t6 = Thread(target=update_accel)
+t7 = Thread(target=printVariablesToFile)
 
 
 
@@ -207,15 +219,15 @@ def printVariables():
     print("Mileage:", miles)
     
 # Print all variables to file for logging
-def printVariablesToFile():
-    fileOut2 = open(fileName, "a")
-    fileOut2.write("Value: %d\n", counter)
+#def printVariablesToFile():
+    #fileOut2 = open(fileName, "a")
+    #fileOut2.write("Value: %d\n", counter)
     #fileOut2.write("Velocity: %d\n", mph)
     #fileOut2.write("Acceleration: %d\n", accel)
     #fileOut2.write("Temperature: %d\n", temperature)
     #fileOut2.write("Voltage: %d\n", voltage)
     #fileOut2.write("Mileage: %d\n", miles)
-    fileOut2.close()
+    #fileOut2.close()
 
 ########################################################################
 
@@ -251,6 +263,7 @@ if __name__ == "__main__":
     t4.start()
     t5.start()
     t6.start()
+    t7.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
     fileName = "/home/pi/Desktop/Dashboard/Logs/DashboardLog - " + str(actual_time) + ".txt"
