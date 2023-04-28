@@ -32,7 +32,8 @@ miles = 0
 # for threading
 counter = 0
 running = True
-fileName = ""
+actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
+fileName = "/home/pi/Desktop/Dashboard/Logs/DashboardLog - " + str(actual_time) + ".txt"
 
 
 # Just for ease of testing, so only one interrupt is needed to stop the
@@ -264,9 +265,7 @@ if __name__ == "__main__":
     t5.start()
     t6.start()
     t7.start()
-    
-    actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    fileName = "/home/pi/Desktop/Dashboard/Logs/DashboardLog - " + str(actual_time) + ".txt"
+
     fileOut = open(fileName, "w")
     fileOut.write("Dashboard Logs: \n")
     fileOut.close()
