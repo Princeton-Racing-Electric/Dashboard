@@ -6,7 +6,7 @@ from flask import Flask, render_template, jsonify
 from threading import Thread, Timer
 from playsound import playsound
 import time, math
-from time import gmtime, strftim
+from time import gmtime, strftime
 import signal
 import serial
 import sys
@@ -32,6 +32,7 @@ miles = 0
 # for threading
 counter = 0
 running = True
+fileOut = ""
 
 
 # Just for ease of testing, so only one interrupt is needed to stop the
@@ -248,8 +249,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-
-    global fileOut = open("DashboardLog - " + str(actual_time) + ".txt", "w")
+    fileOut = open("DashboardLog - " + str(actual_time) + ".txt", "w")
     
     app.run(debug=True)
 
