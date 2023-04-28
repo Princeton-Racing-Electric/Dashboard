@@ -32,7 +32,7 @@ miles = 0
 # for threading
 counter = 0
 running = True
-fileName = ""
+fileOut = ""
 
 
 # Just for ease of testing, so only one interrupt is needed to stop the
@@ -182,7 +182,6 @@ def index():
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
-    printVariablesToFile()
     if(int(10*time.time()) % 10 == 0):
         printVariables()
         printVariablesToFile()
@@ -208,14 +207,12 @@ def printVariables():
     
 # Print all variables to file for logging
 def printVariablesToFile():
-    fileOut2 = open(fileName, "a")
-    fileOut2.write("Value: " + counter+ "\n")
-    #fileOut.write("Velocity: %d\n", mph)
-    #fileOut.write("Acceleration: %d\n", accel)
-    #fileOut.write("Temperature: %d\n", temperature)
-    #fileOut.write("Voltage: %d\n", voltage)
-    #fileOut.write("Mileage: %d\n", miles)
-    fileOut2.close()
+    fileOut.write("Value: %d\n", counter)
+    fileOut.write("Velocity: %d\n", mph)
+    fileOut.write("Acceleration: %d\n", accel)
+    fileOut.write("Temperature: %d\n", temperature)
+    fileOut.write("Voltage: %d\n", voltage)
+    fileOut.write("Mileage: %d\n", miles)
 
 ########################################################################
 
@@ -223,11 +220,11 @@ def printVariablesToFile():
 # runs the bash script sudo shutdown -r now
 @app.route("/restart")
 def restart():
-    #fileOut.close()
+    fileOut.close()
     os.system("sudo reboot")
 
 def restart2():
-    #fileOut.close()
+    fileOut.close()
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
@@ -253,11 +250,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    
-    fileName = "../Logs/DashboardLog - " + str(actual_time) + ".txt"
-    fileOut = open(fileName, "w")
-    fileOut.write("Dashboard Log: \n")
-    fileOut.close()
+    fileOut = open("../Logs/DashboardLog - " + str(actual_time) + ".txt", "w")
     
     app.run(debug=True)
 
