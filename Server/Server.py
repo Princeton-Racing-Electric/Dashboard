@@ -208,14 +208,14 @@ def printVariables():
     
 # Print all variables to file for logging
 def printVariablesToFile():
-    fileOut = open(fileName, "a")
-    fileOut.write("Value: " + counter+ "\n")
+    fileOut2 = open(fileName, "a")
+    fileOut2.write("Value: " + counter+ "\n")
     #fileOut.write("Velocity: %d\n", mph)
     #fileOut.write("Acceleration: %d\n", accel)
     #fileOut.write("Temperature: %d\n", temperature)
     #fileOut.write("Voltage: %d\n", voltage)
     #fileOut.write("Mileage: %d\n", miles)
-    fileOut.close()
+    fileOut2.close()
 
 ########################################################################
 
@@ -253,6 +253,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
+    
     fileName = "../Logs/DashboardLog - " + str(actual_time) + ".txt"
     fileOut = open(fileName, "w")
     fileOut.write("Dashboard Log: \n")
