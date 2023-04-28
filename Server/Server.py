@@ -207,7 +207,7 @@ def printVariables():
     
 # Print all variables to file for logging
 def printVariablesToFile():
-    fileOut2 = open(fileName, "a")
+    fileOut2 = open(fileName, "w")
     fileOut2.write("Value: %d\n", counter)
     #fileOut2.write("Velocity: %d\n", mph)
     #fileOut2.write("Acceleration: %d\n", accel)
