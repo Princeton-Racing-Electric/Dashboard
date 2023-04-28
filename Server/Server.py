@@ -135,11 +135,11 @@ def increment_var():
 def printVariablesToFile():
     fileOut2 = open(fileName, "a")
     fileOut2.write("Value: " + str(counter) + "\n")
-    #fileOut2.write("Velocity: %d\n", mph)
-    #fileOut2.write("Acceleration: %d\n", accel)
-    #fileOut2.write("Temperature: %d\n", temperature)
-    #fileOut2.write("Voltage: %d\n", voltage)
-    #fileOut2.write("Mileage: %d\n", miles)
+    fileOut2.write("Velocity: " + str(mph) + "\n")
+    fileOut2.write("Acceleration: " + str(accel) + "\n")
+    fileOut2.write("Temperature: " + str(temperature) + "\n")
+    fileOut2.write("Voltage: " + str(voltage) + "\n")
+    fileOut2.write("Mileage: " + str(miles) + "\n")
     fileOut2.close()
         
 
