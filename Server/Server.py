@@ -252,7 +252,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    fileName = "~/Desktop/Dashboard/Logs/DashboardLog - " + str(actual_time) + ".txt"
+    fileName = "/home/pi/Desktop/Dashboard/Logs/DashboardLog - " + str(actual_time) + ".txt"
     fileOut = open(fileName, "w")
     fileOut.write("Dashboard Logs: \n")
     fileOut.close()
