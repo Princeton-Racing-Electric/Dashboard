@@ -15,7 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
 import webbrowser # open a webbrowser
-#from Temperature import read_temp 
+from Temperature import read_temp 
 
 # Constants
 DELAY_TIME = 1
@@ -72,8 +72,7 @@ def get_accel() -> float:
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
-    #return read_temp()[0] READD
-    return 0
+    return read_temp()[0]
 
 def get_volt() -> float:
     ad_value = Voltage.readadc(Voltage.AO_pin, Voltage.SPICLK, Voltage.SPIMOSI, Voltage.SPIMISO, Voltage.SPICS)
