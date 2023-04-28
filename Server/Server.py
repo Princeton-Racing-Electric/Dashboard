@@ -250,7 +250,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    fileOut = open("../Logs/DashboardLog - " + str(actual_time) + ".txt", "w")
+    fileOut = open("DashboardLog - " + str(actual_time) + ".txt", "w")
     
     app.run(debug=True)
 
