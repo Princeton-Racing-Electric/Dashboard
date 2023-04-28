@@ -17,6 +17,8 @@ long lastTorqueTime = millis();
 
 bool driveEnabled = false;
 
+uint8_t packet[8];
+
 void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
 
@@ -35,9 +37,12 @@ void setup() {
 
 void loop() {
   long currentTime = millis();
-  currentState = digitalRead(BUTTON_PIN);
-  char serialData = Serial.read();
-  readData(1,0x606C,0x00);
+  
+  if(currentTime - lastTime > 200){
+    readData(1,0x606C,0x00);
+    lastTime = currentTime;
+  }
+  
   recieveData();
   
   // this went before receiveData();
@@ -128,10 +133,11 @@ void recieveData() {
     */
 
     if (!CAN.packetRtr()) {
+      int i = 0;
       while (CAN.available()) {
-        message = CAN.read();
-        // Serial.print(message.length);
-        Serial.println(message.data);
+        packet[i] = CAN.read();
+        Serial.println(packet[i],HEX);
+        i++;
       }
       // Serial.print(" and requested length ");
       
