@@ -182,6 +182,7 @@ def index():
 # route to return current value of my_variable
 @app.route("/update", methods=["POST"])
 def update():
+    printVariablesToFile()
     if(int(10*time.time()) % 10 == 0):
         printVariables()
         printVariablesToFile()
@@ -250,7 +251,7 @@ if __name__ == "__main__":
     t6.start()
     
     actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
-    fileOut = open("DashboardLog - " + str(actual_time) + ".txt", "w")
+    fileOut = open("../Logs/DashboardLog - " + str(actual_time) + ".txt", "w")
     
     app.run(debug=True)
 
