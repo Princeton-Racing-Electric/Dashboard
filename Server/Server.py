@@ -71,7 +71,8 @@ def get_accel() -> float:
 
 # returns the current temperature in (???) from the temp sensor
 def get_temp() -> float:
-    return read_temp()[0]
+    #return read_temp()[0] READD
+    return 0
 
 def get_volt() -> float:
     ad_value = Voltage.readadc(Voltage.AO_pin, Voltage.SPICLK, Voltage.SPIMOSI, Voltage.SPIMISO, Voltage.SPICS)
