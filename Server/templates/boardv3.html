@@ -366,10 +366,10 @@
 
     // changing temperature images currently in C 
     // motor ranges b/w 100 - 200C  -- yellow at 100
-    //let temp = 200;
+    let temp = 200;
     setInterval(function() {
         if (document.getElementById("temperature-number") != null) {
-            let temp = document.getElementById("temperature-number").innerHTML;
+            temp = document.getElementById("temperature-number").innerHTML;
             if (!metricTemp) temp = convertFahrenheitToCelsius(temp);
             if (temp <= 25) {
                 // document.getElementById("thermometer-pic").src = "temp_green.png";
