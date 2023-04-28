@@ -15,7 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import HallEffect
 import Voltage
 import webbrowser # open a webbrowser
-from Temperature import read_temp 
+#from Temperature import read_temp 
 
 # Constants
 DELAY_TIME = 1
