@@ -208,12 +208,12 @@ def printVariables():
     
 # Print all variables to file for logging
 def printVariablesToFile():
-    fileOut.write("Value: %d\n", counter)
-    fileOut.write("Velocity: %d\n", mph)
-    fileOut.write("Acceleration: %d\n", accel)
-    fileOut.write("Temperature: %d\n", temperature)
-    fileOut.write("Voltage: %d\n", voltage)
-    fileOut.write("Mileage: %d\n", miles)
+    fileOut.write("Value: " + counter+ "\n")
+    #fileOut.write("Velocity: %d\n", mph)
+    #fileOut.write("Acceleration: %d\n", accel)
+    #fileOut.write("Temperature: %d\n", temperature)
+    #fileOut.write("Voltage: %d\n", voltage)
+    #fileOut.write("Mileage: %d\n", miles)
 
 ########################################################################
 
