@@ -132,13 +132,27 @@ void recieveData() {
     Serial.print(CAN.packetId(), HEX);
     */
 
+    // 10 bytes in a packet, last four bytes are data, little endian
+    int velocity = 0;
     if (!CAN.packetRtr()) {
       int i = 0;
       while (CAN.available()) {
         packet[i] = CAN.read();
-        Serial.println(packet[i],HEX);
+        if (i == 6){
+          velocity += packet[i]
+        }
+        if (i == 7){
+          velocity += 16*packet[i]
+        }
+        if (i == 8){
+          velocity += 256*packet[i]
+        }
+        if (i == 9){
+          velocity += 4096*packet[i]
+        }
         i++;
       }
+      Serial.println(velocity);
       // Serial.print(" and requested length ");
       
     } 
